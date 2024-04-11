@@ -1,0 +1,36 @@
+Event	ID	Name			Wwise Object Path	Notes
+	2269466764	Switch_Test			\Default Work Unit\Switch_Test	
+	2699324104	Trigger_Test2			\Default Work Unit\Trigger_Test2	
+	2699324107	Trigger_Test1			\Default Work Unit\Trigger_Test1	
+	2925175128	Ambience_Test			\Default Work Unit\Ambience_Test	
+
+Switch Group	ID	Name			Wwise Object Path	Notes
+	2623550553	TestSwitch			\Default Work Unit\TestSwitch	
+
+Switch	ID	Name	Switch Group			Notes
+	1590382669	Switch2	TestSwitch			
+	1590382670	Switch1	TestSwitch			
+
+State Group	ID	Name			Wwise Object Path	Notes
+	763730847	TestStates			\Default Work Unit\TestStates	
+
+State	ID	Name	State Group			Notes
+	748895195	None	TestStates			
+	1160234136	Normal	TestStates			
+	3975260481	LowPassed	TestStates			
+
+Custom State	ID	Name	State Group	Owner		Notes
+	188822350	Normal	TestStates	\Actor-Mixer Hierarchy\Default Work Unit\Test\OneShots\Switch_Test\SwitchSound2		
+	373722898	Normal	TestStates	\Actor-Mixer Hierarchy\Default Work Unit\Test\OneShots\Switch_Test\SwitchSound1		
+	950412028	LowPassed	TestStates	\Actor-Mixer Hierarchy\Default Work Unit\Test		
+
+Game Parameter	ID	Name			Wwise Object Path	Notes
+	4037818096	TestPitchRTPC			\Default Work Unit\TestPitchRTPC	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	568000024	AmbienceTest	I:\LD55\Wwise Project\LD55Wwise\.cache\Web\SFX\Refresh 51_Room tone_EE348525.wem		\Actor-Mixer Hierarchy\Default Work Unit\Test\Ambience\AmbienceTest		2284944
+	586554895	Trigger_Test2	I:\LD55\Wwise Project\LD55Wwise\.cache\Web\SFX\Refresh 32_Drop_69078645.wem		\Actor-Mixer Hierarchy\Default Work Unit\Test\OneShots\Trigger_Test2		694436
+	624372652	SwitchSound2	I:\LD55\Wwise Project\LD55Wwise\.cache\Web\SFX\SOMA REC1 CLIP06_D22D6EC3.wem		\Actor-Mixer Hierarchy\Default Work Unit\Test\OneShots\Switch_Test\SwitchSound2		456960
+	662235353	Trigger_Test1	I:\LD55\Wwise Project\LD55Wwise\.cache\Web\SFX\Day 11_Whoosh_E79E2BAC.wem		\Actor-Mixer Hierarchy\Default Work Unit\Test\OneShots\Trigger_Test1		103776
+	912899802	SwitchSound1	I:\LD55\Wwise Project\LD55Wwise\.cache\Web\SFX\SOMA REC1 CLIP06_541B74D6.wem		\Actor-Mixer Hierarchy\Default Work Unit\Test\OneShots\Switch_Test\SwitchSound1		188124
+

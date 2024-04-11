@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="16" SoundBankVersion="145">
+	<RootPaths>
+		<ProjectRoot>../../../../../../../Wwise Project/LD55Wwise</ProjectRoot>
+		<SourceFilesRoot>../../../../../../../Wwise Project/LD55Wwise/.cache/Windows</SourceFilesRoot>
+		<SoundBanksRoot>.</SoundBanksRoot>
+		<ExternalSourcesInputFile></ExternalSourcesInputFile>
+		<ExternalSourcesOutputRoot>../../../../../../../Wwise Project/LD55Wwise/GeneratedSoundBanks/Windows</ExternalSourcesOutputRoot>
+	</RootPaths>
+	<DialogueEvents/>
+	<SoundBanks>
+		<SoundBank Id="1355168291" Type="User" Language="SFX" Hash="{05CDAA60-B5FE-AEB0-9C7F-09AA3425A9BC}">
+			<ShortName>Init</ShortName>
+			<Path>Init.bnk</Path>
+			<Plugins>
+				<AudioDevices>
+					<Plugin Id="2317455096" Name="No_Output" LibName="No Output" LibId="11862023"/>
+					<Plugin Id="3859886410" Name="System" LibName="System" LibId="11403271"/>
+				</AudioDevices>
+			</Plugins>
+			<Busses>
+				<Bus Id="3803692087" Name="Master Audio Bus"/>
+			</Busses>
+			<GameParameters>
+				<GameParameter Id="4037818096" Name="TestPitchRTPC"/>
+			</GameParameters>
+			<StateGroups>
+				<StateGroup Id="763730847" Name="TestStates">
+					<States>
+						<State Id="748895195" Name="None"/>
+						<State Id="1160234136" Name="Normal"/>
+						<State Id="3975260481" Name="LowPassed"/>
+					</States>
+				</StateGroup>
+			</StateGroups>
+			<SwitchGroups>
+				<SwitchGroup Id="2623550553" Name="TestSwitch">
+					<Switches>
+						<Switch Id="1590382669" Name="Switch2"/>
+						<Switch Id="1590382670" Name="Switch1"/>
+					</Switches>
+				</SwitchGroup>
+			</SwitchGroups>
+		</SoundBank>
+		<SoundBank Id="1831431028" Type="User" Language="SFX" Hash="{9EEBAA6A-2AAD-FE19-C788-A6B6C876B68A}">
+			<ShortName>TestSoundbank</ShortName>
+			<Path>TestSoundbank.bnk</Path>
+			<Media>
+				<File Id="568000024" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Refresh 51_Room tone.wav</ShortName>
+					<CachePath>SFX/Refresh 51_Room tone_EE348525.wem</CachePath>
+				</File>
+				<File Id="586554895" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Refresh 32_Drop.wav</ShortName>
+					<CachePath>SFX/Refresh 32_Drop_69078645.wem</CachePath>
+				</File>
+				<File Id="624372652" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SOMA REC1 CLIP06.wav</ShortName>
+					<CachePath>SFX/SOMA REC1 CLIP06_D22D6EC3.wem</CachePath>
+				</File>
+				<File Id="662235353" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>Day 11_Whoosh.wav</ShortName>
+					<CachePath>SFX/Day 11_Whoosh_E79E2BAC.wem</CachePath>
+				</File>
+				<File Id="912899802" Language="SFX" Streaming="false" Location="Memory">
+					<ShortName>SOMA REC1 CLIP06.wav</ShortName>
+					<CachePath>SFX/SOMA REC1 CLIP06_541B74D6.wem</CachePath>
+				</File>
+			</Media>
+			<Events>
+				<Event Id="2925175128" Name="Ambience_Test" DurationType="Infinite">
+					<MediaRefs>
+						<MediaRef Id="568000024"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="2269466764" Name="Switch_Test" DurationType="OneShot" DurationMin="0.9793208" DurationMax="2.3795068">
+					<SwitchContainers>
+						<SwitchContainer>
+							<SwitchValue GroupType="Switch" GroupId="2623550553" Id="1590382670" Default="true"/>
+							<MediaRefs>
+								<MediaRef Id="912899802"/>
+							</MediaRefs>
+						</SwitchContainer>
+						<SwitchContainer>
+							<SwitchValue GroupType="Switch" GroupId="2623550553" Id="1590382669"/>
+							<MediaRefs>
+								<MediaRef Id="624372652"/>
+							</MediaRefs>
+						</SwitchContainer>
+					</SwitchContainers>
+				</Event>
+				<Event Id="2699324107" Name="Trigger_Test1" DurationType="OneShot" DurationMin="0.76367533" DurationMax="0.76367533">
+					<MediaRefs>
+						<MediaRef Id="662235353"/>
+					</MediaRefs>
+				</Event>
+				<Event Id="2699324104" Name="Trigger_Test2" DurationType="OneShot" DurationMin="3.6163635" DurationMax="3.6163635">
+					<MediaRefs>
+						<MediaRef Id="586554895"/>
+					</MediaRefs>
+				</Event>
+			</Events>
+			<GameParameters>
+				<GameParameter Id="4037818096" Name="TestPitchRTPC"/>
+			</GameParameters>
+			<SwitchGroups>
+				<SwitchGroup Id="2623550553" Name="TestSwitch">
+					<Switches>
+						<Switch Id="1590382669" Name="Switch2"/>
+						<Switch Id="1590382670" Name="Switch1"/>
+					</Switches>
+				</SwitchGroup>
+			</SwitchGroups>
+		</SoundBank>
+	</SoundBanks>
+	<FileHash>{986CFC37-306E-A5FE-F23F-DC160E80AE42}</FileHash>
+</SoundBanksInfo>

@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: WwiseData_Linux
+  m_EditorClassIdentifier: 
+  m_GroupName: WwiseData_Linux
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 6ed9094251a1e584da24d6fbeb131b84
+  m_SerializeEntries:
+  - m_GUID: 64d7cfe6d7a3aa64694769bd45755c4d
+    m_Address: Assets/WwiseData/Banks/Linux/TestSoundbank.bnk
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: cab200b8144d0544d8ef0b357c134aa8, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: add4aaebb3a4fe64ca691322343c6a8d, type: 2}
+    - {fileID: 11400000, guid: 11bb6f225039eac4b980b78a1ab68384, type: 2}

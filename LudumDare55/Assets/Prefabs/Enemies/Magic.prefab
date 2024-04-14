@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 5146728092926491947}
   - component: {fileID: 7365193094334967216}
   - component: {fileID: 7565201612238100377}
+  - component: {fileID: 1281754023455919626}
   m_Layer: 0
   m_Name: Magic
   m_TagString: Magic
@@ -62,6 +63,9 @@ MonoBehaviour:
   onHitEvent:
     m_PersistentCalls:
       m_Calls: []
+  onHealthChange:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!70 &3362978959216402354
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -94,8 +98,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.5, y: 1}
+  m_Offset: {x: 0.0014283061, y: 0}
+  m_Size: {x: 0.959908, y: 1}
   m_Direction: 0
 --- !u!212 &526425210561864065
 SpriteRenderer:
@@ -138,7 +142,11 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
+<<<<<<< Updated upstream
   m_Sprite: {fileID: 21300000, guid: 13fb866e19b8eb84fb8a726c40df8b70, type: 3}
+=======
+  m_Sprite: {fileID: 21300000, guid: f656ae08ca124b64c846b109e9ea7d43, type: 3}
+>>>>>>> Stashed changes
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -193,12 +201,12 @@ MonoBehaviour:
   radius: 0.5
   height: 0.99
   canMove: 1
-  maxSpeed: 10
+  maxSpeed: 5
   gravity: {x: 0, y: 0, z: 0}
   groundMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  endReachedDistance: 0.2
+  endReachedDistance: 1
   whenCloseToDestination: 0
   rvoDensityBehavior:
     enabled: 1
@@ -220,7 +228,7 @@ MonoBehaviour:
   targetCompatibility: {fileID: 0}
   maxAcceleration: -2.5
   rotationSpeed: 360
-  slowdownDistance: 0.6
+  slowdownDistance: 3
   pickNextWaypointDist: 2
   alwaysDrawGizmos: 1
   slowWhenNotFacingTarget: 1
@@ -262,3 +270,30 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!50 &1281754023455919626
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3801413901710508019}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 0.1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

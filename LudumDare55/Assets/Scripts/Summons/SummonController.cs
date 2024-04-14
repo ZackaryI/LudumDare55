@@ -78,6 +78,11 @@ public class SummonController : MonoBehaviour
     {
         Initialize();
         colliderRange = GetComponent<Collider2D>();
+        if (GetComponentInChildren<SummonDamageOnEnter>())
+        {
+            GetComponentInChildren<SummonDamageOnEnter>().damage = summonDamage;
+        }
+        //Reference to track Player
         if (charRef == null)
         {
             charRef = FindAnyObjectByType<PlayerController>();
@@ -93,8 +98,11 @@ public class SummonController : MonoBehaviour
 
         //Loop for attack 
         //We verify that the target is actually alive and active 
-        if(target != null && target.gameObject.activeInHierarchy && target.enemyHP >=0)
-        { 
+        if (target != null && target.gameObject.activeInHierarchy && target.enemyHP >=0)
+        {
+
+            Vector2 direction = target.transform.position - transform.position;
+            transform.rotation = Quaternion.FromToRotation(Vector3.up, direction);
             checkDistance();
             if (canAttack == false)
             { 
@@ -111,6 +119,8 @@ public class SummonController : MonoBehaviour
         else
         {
             aIDestination.target = charRef.transform;
+            Vector2 direction = charRef.transform.position - transform.position;
+            transform.rotation = Quaternion.FromToRotation(Vector3.up, direction);
         }
     }
 
@@ -120,8 +130,17 @@ public class SummonController : MonoBehaviour
         EnemyController enemyTarget = GetClosestEnemy(hitColliders, radius);
         if (enemyTarget != null)
         {
-            target = enemyTarget; 
-            aIDestination.target = enemyTarget.gameObject.transform;
+            target = enemyTarget;
+            float dist = Vector3.Distance(charRef.transform.position, transform.position);
+            if (dist <= summonRangeOfAttack)
+            {
+                aIDestination.target = null;
+                aiPath.canMove = false;
+                aiPath.canMove = true;
+            } else
+            {
+                aIDestination.target = enemyTarget.gameObject.transform;
+            }
         } else
         { 
             if ( radius <= radiusCap)
@@ -182,6 +201,9 @@ public class SummonController : MonoBehaviour
         float dist = Vector3.Distance(charRef.transform.position, transform.position);
         if (dist <= summonRangeOfAttack & canAttack == true)
         {
+            aIDestination.target = null;
+            aiPath.canMove = false;
+            aiPath.canMove = true;
             canAttack = false;
             StartCoroutine(AttackLoop());
         }
@@ -199,7 +221,7 @@ public class SummonController : MonoBehaviour
             colliderAttack.enabled = true;
         }
         aiPath.canMove = false;
-        animator.SetTrigger("Attack");
+        //animator.SetTrigger("Attack");
         if (summonTypeSO.prefabProjectiles.Count > 0 && isDying == false)
         {
             GameObject o = Instantiate(summonTypeSO.prefabProjectiles[summonTier - 1]);
@@ -213,9 +235,9 @@ public class SummonController : MonoBehaviour
         //allow the enemy to move again
         aiPath.canMove = true;
         yield return new WaitForSeconds(0.2f);
-        if (colliderRange != null)
+        if (colliderAttack != null && isDying == false)
         {
-            colliderRange.enabled = false;
+            colliderAttack.enabled = false;
         }
     }
 
@@ -223,9 +245,7 @@ public class SummonController : MonoBehaviour
     {
 
         if (isDying == false)
-        {
-            if (colliderRange != null)
-                colliderRange.enabled = false;
+        { 
             //If we're doing score, add increment to score there 
             isDying = true;
 
@@ -239,7 +259,7 @@ public class SummonController : MonoBehaviour
     IEnumerator Despawn()
     {
         //We let the animation finished first 
-        yield return new WaitWhile(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime <= 1.0f);
+        //yield return new WaitWhile(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime <= 1.0f);
         yield return new WaitForSeconds(2f);
         //We reset the stats of the object to reuse it later through the object pool 
         Initialize();

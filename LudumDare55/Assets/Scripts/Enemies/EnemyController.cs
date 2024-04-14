@@ -58,10 +58,12 @@ public class EnemyController : MonoBehaviour
     /// Used to regulate delay attack. 
     /// </summary>
     private bool canAttack = false;
+    private AIDestinationSetter aIDestinationSetter;
 
     private void Initialize()
     {
         aiPath = GetComponent<AIPath>();
+        aIDestinationSetter = GetComponent<AIDestinationSetter>();
         animator = GetComponent<Animator>();
         enemyName = enemyTypeSO.enemyName;
         enemyRangeOfAttack = enemyTypeSO.enemyRangeOfAttack;
@@ -72,23 +74,37 @@ public class EnemyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        colliderRange = GetComponent<Collider2D>(); 
-        if(charRef == null)
+        //Melee attack Init
+        colliderAttack = GetComponentInChildren<Collider2D>();
+        if (GetComponentInChildren<EnemyDamageOnEnter>())
+        {
+            GetComponentInChildren<EnemyDamageOnEnter>().damage = enemyDamage; 
+        }
+        //Reference to track Player
+        if (charRef == null)
         {
             charRef = FindAnyObjectByType<PlayerController>(); 
         }
+
+        colliderRange = GetComponent<Collider2D>();
         Initialize();
-        Debug.Log(enemyHP); 
+
+        if (aIDestinationSetter.target == null)
+        {
+            aIDestinationSetter.target = charRef.transform;
+        }
+
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        Vector2 direction = charRef.transform.position - transform.position;
+        transform.rotation = Quaternion.FromToRotation(Vector3.up, direction);
         checkDistance();
         if (canAttack == false)
         {
-
+            
             time += Time.deltaTime;
 
             if (time > delayAttack)
@@ -96,6 +112,9 @@ public class EnemyController : MonoBehaviour
                 time = 0;
                 canAttack = true;
             }
+        } else
+        { 
+            aIDestinationSetter.target = null;
         } 
     }
 
@@ -138,7 +157,7 @@ public class EnemyController : MonoBehaviour
             colliderAttack.enabled = true;
         } 
         aiPath.canMove = false; 
-        animator.SetTrigger("Attack");
+        //animator.SetTrigger("Attack");
         if (enemyTypeSO.prefabProjectiles.Count > 0 && isDying == false)
         {
             GameObject o = Instantiate(enemyTypeSO.prefabProjectiles[enemyTier-1]);
@@ -146,14 +165,10 @@ public class EnemyController : MonoBehaviour
             o.transform.position = gameObject.transform.localPosition; 
         }
         //Waiting on anim end
-        yield return new WaitWhile(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime <= 1.0f);
+        //yield return new WaitWhile(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime <= 1.0f);
         //allow the enemy to move again
         aiPath.canMove = true;
-        yield return new WaitForSeconds(0.2f);
-        if (colliderRange != null)
-        {
-            colliderRange.enabled = false;
-        }
+        yield return new WaitForSeconds(0.2f); 
     }
 
     void onDeath()
@@ -161,8 +176,6 @@ public class EnemyController : MonoBehaviour
 
         if (isDying == false)
         {
-            if (colliderRange != null)
-                colliderRange.enabled = false;
             //If we're doing score, add increment to score there 
             isDying = true;
 

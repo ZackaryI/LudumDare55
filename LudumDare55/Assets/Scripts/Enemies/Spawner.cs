@@ -28,6 +28,7 @@ public class Spawner : MonoBehaviour
     private List<Wave> backupWaves;
 
     private ObjectPool objPool;
+    private bool spawnedOnce = false; 
     void Start()
     {
         backupWaves = waves;
@@ -103,15 +104,46 @@ public class Spawner : MonoBehaviour
     public void SpawnOnce()
     {
         Wave currentWave = waves[0];
-        for (int x = 0; x < currentWave.contentWave[0].waveSize; x++)
+        for (int i = 0; i < currentWave.contentWave.Count; i++)
         {
-            Debug.Log("spawned once" + currentWave.contentWave[0].enemyType.ToString()); 
-            GameObject e = objPool.GetPooledObject(currentWave.contentWave[0].enemyType.ToString()); 
-            e.GetComponent<EnemyController>().enemyTier = currentWave.contentWave[0].enemyTier; 
-                e.transform.position = gameObject.transform.position;
-                e.SetActive(true); 
+
+            for (int x = 0; x < currentWave.contentWave[i].waveSize; x++)
+            {
+                Debug.Log("spawned once" + currentWave.contentWave[i].enemyType.ToString()); 
+                GameObject e = objPool.GetPooledObject(currentWave.contentWave[i].enemyType.ToString()); 
+                e.GetComponent<EnemyController>().enemyTier = currentWave.contentWave[i].enemyTier;
+                var randomPos = (Vector3)Random.insideUnitCircle * 1;
+                randomPos += gameObject.transform.position;
+                e.transform.position = randomPos;
+                e.SetActive(true);
+            }
         }
     }
+
+    public void SpawnOnceWithRoom(RoomManager rm)
+    {
+        if(spawnedOnce == false)
+        {
+            spawnedOnce = true; 
+            Wave currentWave = waves[0];
+            for (int i = 0; i < currentWave.contentWave.Count; i++)
+            {
+
+                for (int x = 0; x < currentWave.contentWave[i].waveSize; x++)
+                {
+                    Debug.Log("spawned once" + currentWave.contentWave[i].enemyType.ToString());
+                    GameObject e = objPool.GetPooledObject(currentWave.contentWave[i].enemyType.ToString());
+                    e.GetComponent<EnemyController>().onDeathEvent.AddListener(() => { rm.addToKill(); });
+                    e.GetComponent<EnemyController>().enemyTier = currentWave.contentWave[i].enemyTier;
+                    var randomPos = (Vector3)Random.insideUnitCircle * 1;
+                    randomPos += gameObject.transform.position;
+                    e.transform.position = randomPos;
+                    e.SetActive(true); 
+                }
+            }
+        }
+    }
+
 }
 
 public enum EnemyType

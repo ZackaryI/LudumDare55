@@ -54,10 +54,9 @@ public class Projectile : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         if(enemyProjectile == true)
-        {
-
+        { 
             if(collision.gameObject.GetComponent<PlayerController>() != null && collision != lastCollider)
-            {
+            { 
                 lastCollider = collision;
                 collision.gameObject.GetComponent<PlayerController>().TakeDamage(projectileDamage);
                 onCollision?.Invoke();

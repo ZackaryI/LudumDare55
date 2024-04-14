@@ -4,7 +4,7 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     [SerializeField] ItemAttrubutes itemAttrubutes;
-    [SerializeField] bool isPlayerInRange;
+    bool isPlayerInRange;
 
     [SerializeField] GameObject displayStats;
     [SerializeField] TextMeshProUGUI damageBonusText;

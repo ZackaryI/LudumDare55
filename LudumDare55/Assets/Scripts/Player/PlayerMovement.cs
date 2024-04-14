@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class PlayerMovement
 {
-    public void Movement(Rigidbody2D playerRigidbody, PlayerAttributes playerAttributes, float bonus)
+    public void Movement(Rigidbody2D playerRigidbody, PlayerAttributes playerAttributes)
     {
         Vector2 movementVector = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        playerRigidbody.velocity = movementVector * (playerAttributes.playerMoveSpeed + (playerAttributes.playerMoveSpeed * (bonus * .01f)));      
+        playerRigidbody.velocity = movementVector * playerAttributes.playerMoveSpeed;      
     }
     public void RotatePlayer(Camera cam, Transform playerTransform)
     {

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -55,7 +56,7 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        playerMovement.Movement(playerRigidbody, playerAttributes, itemTracker.GetSpeedBonus());
+        playerMovement.Movement(playerRigidbody, playerAttributes);
         playerMovement.RotatePlayer(cam, transform);
     }
 
@@ -77,7 +78,19 @@ public class PlayerController : MonoBehaviour
     {
         return itemTracker.GetItemData(index);
     }
+    public ItemAttrubutes GetItemDataForInventory(Image gameobject) 
+    {
 
+        for (byte i = 0; i < icons.Length; i++) 
+        {
+            if (icons[i] == gameobject) 
+            {
+                return DisplayItemData(i);    
+            }
+        }
+
+        return null;
+    }
     //Health class related methods
     public void Heal(float amount)
     {

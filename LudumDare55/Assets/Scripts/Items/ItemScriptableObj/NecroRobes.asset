@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2b61105e2a564a4baa5e49c5780b611, type: 3}
+  m_Name: NecroRobes
+  m_EditorClassIdentifier: 
+  itemKey: 1
+  damageBonus: 2
+  speedBonus: 2
+  hpBonus: 1
+  summonCapacityBonus: 4
+  isWeapon: 0
+  weaponAttributes: {fileID: 11400000, guid: 470d51942e1222e49983e2f15a19084e, type: 2}
+  droppedItem: {fileID: 9029922134116938090, guid: a76f4d0d6e48a2444b12ac20e9035079, type: 3}
+  Icon: {fileID: 21300000, guid: 4bf83ab9d1e3f5745bf6195ab496d1b7, type: 3}
+  playerSprite: {fileID: 21300000, guid: e5c43e4a14ce25349a3a0cdd878a9c40, type: 3}

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2b61105e2a564a4baa5e49c5780b611, type: 3}
+  m_Name: SteelBow
+  m_EditorClassIdentifier: 
+  itemKey: 0
+  damageBonus: 2
+  speedBonus: 1
+  hpBonus: 1
+  summonCapacityBonus: 0
+  isWeapon: 1
+  weaponAttributes: {fileID: 11400000, guid: 470d51942e1222e49983e2f15a19084e, type: 2}
+  droppedItem: {fileID: 330200629868409222, guid: 71dc06da197599942948619386a50343, type: 3}
+  Icon: {fileID: 21300000, guid: 357d8ed5502d48a48baaebd9fdb6e0e5, type: 3}
+  playerSprite: {fileID: 0}

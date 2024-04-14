@@ -18,4 +18,5 @@ public class ItemAttrubutes : ScriptableObject
 
     public Transform droppedItem;
     public Sprite Icon;
+    public Sprite playerSprite;
 }

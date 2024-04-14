@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2b61105e2a564a4baa5e49c5780b611, type: 3}
+  m_Name: MasterThiefArmor
+  m_EditorClassIdentifier: 
+  itemKey: 1
+  damageBonus: 8
+  speedBonus: 5
+  hpBonus: 5
+  summonCapacityBonus: 4
+  isWeapon: 0
+  weaponAttributes: {fileID: 11400000, guid: 470d51942e1222e49983e2f15a19084e, type: 2}
+  droppedItem: {fileID: 1494659718318238228, guid: 33e0d93a4e37a964094153829801b7b8, type: 3}
+  Icon: {fileID: 21300000, guid: 413013bc50621964aa99e73e807f6971, type: 3}
+  playerSprite: {fileID: 21300000, guid: 58b3c0e2e575d754b86d129df04a9f79, type: 3}

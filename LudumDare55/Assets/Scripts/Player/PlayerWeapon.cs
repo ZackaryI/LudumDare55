@@ -1,14 +1,14 @@
 
+using System;
+
 public class PlayerWeapon
 {
     WeaponAttributes weaponAttributes;
-    float damageBonus;
-    public PlayerWeapon(WeaponAttributes weaponAttributes, float damageBonus) 
+    public PlayerWeapon(WeaponAttributes weaponAttributes) 
     {
         this.weaponAttributes = weaponAttributes;
-        this.damageBonus = damageBonus;
     }
-    public void Attack() 
+    public void Attack(float bonus) 
     {
         /*
            shoots projectile
@@ -16,23 +16,19 @@ public class PlayerWeapon
         */
         if (weaponAttributes.isMelee)
         {
-            meleeAttack();
+            meleeAttack(bonus);
         }
         else 
         {
-            RangeAttack();
+            RangeAttack(bonus);
         }
     }
-    void meleeAttack() 
+    void meleeAttack(float bonus) 
     {
-    
+        throw new NotImplementedException();
     }
-    void RangeAttack() 
+    void RangeAttack(float bonus) 
     {
-    
-    }
-    public void UpdateDamageBonus(float bonus) 
-    {
-        damageBonus = bonus;
+        throw new NotImplementedException();
     }
 }

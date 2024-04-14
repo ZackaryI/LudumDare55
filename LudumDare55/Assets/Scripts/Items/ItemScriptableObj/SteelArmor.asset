@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2b61105e2a564a4baa5e49c5780b611, type: 3}
+  m_Name: SteelArmor
+  m_EditorClassIdentifier: 
+  itemKey: 1
+  damageBonus: 4
+  speedBonus: 3
+  hpBonus: 5
+  summonCapacityBonus: 3
+  isWeapon: 0
+  weaponAttributes: {fileID: 11400000, guid: 470d51942e1222e49983e2f15a19084e, type: 2}
+  droppedItem: {fileID: 4014752976765829834, guid: 70a78001014e43b469b90db5cc044cf3, type: 3}
+  Icon: {fileID: 21300000, guid: 7c7b04f39ed42654a98ff82d89c17995, type: 3}
+  playerSprite: {fileID: 21300000, guid: bbbea332c3b79e74395a13980937e580, type: 3}

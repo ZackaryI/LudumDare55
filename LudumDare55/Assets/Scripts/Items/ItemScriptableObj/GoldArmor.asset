@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2b61105e2a564a4baa5e49c5780b611, type: 3}
+  m_Name: GoldArmor
+  m_EditorClassIdentifier: 
+  itemKey: 1
+  damageBonus: 6
+  speedBonus: 3
+  hpBonus: 8
+  summonCapacityBonus: 4
+  isWeapon: 0
+  weaponAttributes: {fileID: 11400000, guid: 470d51942e1222e49983e2f15a19084e, type: 2}
+  droppedItem: {fileID: 6055822455056728393, guid: 714bab6e07cf7e44099c1da99284d55d, type: 3}
+  Icon: {fileID: 21300000, guid: dc2f890fc82bf8444b2a77ef4a84db93, type: 3}
+  playerSprite: {fileID: 21300000, guid: e3654847b7e554d49bc470d495dc1b59, type: 3}

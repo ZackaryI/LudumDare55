@@ -4,7 +4,7 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     [SerializeField] ItemAttrubutes itemAttrubutes;
-    [SerializeField] bool isPlayerInRange;
+    bool isPlayerInRange;
 
     [SerializeField] GameObject displayStats;
     [SerializeField] TextMeshProUGUI damageBonusText;
@@ -19,13 +19,16 @@ public class Item : MonoBehaviour
     [SerializeField] TextMeshProUGUI summonCapacityBonusTextEquiped;
 
     PlayerController playerController;
+
     private void Start()
     {
         isPlayerInRange = false;
         damageBonusText.text = itemAttrubutes.damageBonus.ToString();
         speedBonusText.text = itemAttrubutes.speedBonus.ToString();
         hpBonusText.text = itemAttrubutes.hpBonus.ToString();
-        summonCapacityBonusText.text = itemAttrubutes.summonCapacityBonus.ToString(); 
+        summonCapacityBonusText.text = itemAttrubutes.summonCapacityBonus.ToString();
+
+        GetComponent<SpriteRenderer>().sprite = itemAttrubutes.Icon;
     }
     private void Update()
     {

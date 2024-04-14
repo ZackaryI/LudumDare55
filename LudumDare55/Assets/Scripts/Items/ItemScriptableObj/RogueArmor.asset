@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2b61105e2a564a4baa5e49c5780b611, type: 3}
+  m_Name: RogueArmor
+  m_EditorClassIdentifier: 
+  itemKey: 1
+  damageBonus: 6
+  speedBonus: 4
+  hpBonus: 3
+  summonCapacityBonus: 4
+  isWeapon: 0
+  weaponAttributes: {fileID: 11400000, guid: 470d51942e1222e49983e2f15a19084e, type: 2}
+  droppedItem: {fileID: 8022590513290918666, guid: f821ecc49c5cae24ba11cb8f9e73d8f2, type: 3}
+  Icon: {fileID: 21300000, guid: bcb0c8eba04697b4d9754790eee87f9f, type: 3}
+  playerSprite: {fileID: 21300000, guid: c14db2be11c078d4ea3eb67252bd9049, type: 3}

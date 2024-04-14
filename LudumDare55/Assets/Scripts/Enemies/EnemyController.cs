@@ -1,4 +1,5 @@
 using Pathfinding;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -38,12 +39,17 @@ public class EnemyController : MonoBehaviour
     /// if the enemy receives damage. 
     /// The damage is already called with the method OnHit, this event is for additional events outside the class. 
     /// </summary>
-    public UnityEvent onHitEvent; 
+    public UnityEvent onHitEvent;
+    /// <summary>
+    /// if the enemy has a change to its healthbar. 
+    /// The damage is already called with the method OnHit, this event is for additional events outside the class. 
+    /// </summary>
+    public IntUnityEvent onHealthChange;
     private AIPath aiPath; 
     /// <summary>
     /// Used to know the character position
     /// </summary>
-    private CharacterTarget charRef; 
+    private PlayerController charRef; 
     /// <summary>
     /// Used to check if the enemy is currently in the dying animation.
     /// </summary>
@@ -69,7 +75,7 @@ public class EnemyController : MonoBehaviour
         colliderRange = GetComponent<Collider2D>(); 
         if(charRef == null)
         {
-            charRef = FindAnyObjectByType<CharacterTarget>(); 
+            charRef = FindAnyObjectByType<PlayerController>(); 
         }
         Initialize();
         Debug.Log(enemyHP); 
@@ -104,8 +110,15 @@ public class EnemyController : MonoBehaviour
     }
 
     public void OnHit(float damage)
-    { 
+    {
+        enemyHP -= damage;
+        onHitEvent?.Invoke();
+        onHealthChange?.Invoke((int)damage); 
 
+        if(enemyHP < 0)
+        {
+            onDeathEvent?.Invoke(); 
+        }
     }
     public void checkDistance()
     {
@@ -129,6 +142,7 @@ public class EnemyController : MonoBehaviour
         if (enemyTypeSO.prefabProjectiles.Count > 0 && isDying == false)
         {
             GameObject o = Instantiate(enemyTypeSO.prefabProjectiles[enemyTier-1]);
+            o.GetComponent<Projectile>().projectileDamage = enemyDamage; 
             o.transform.position = gameObject.transform.localPosition; 
         }
         //Waiting on anim end
@@ -153,7 +167,7 @@ public class EnemyController : MonoBehaviour
             isDying = true;
 
             aiPath.canMove = false;
-            animator.SetTrigger("Death");
+            //animator.SetTrigger("Death");
             StartCoroutine(Despawn());
         }
 
@@ -162,9 +176,10 @@ public class EnemyController : MonoBehaviour
     IEnumerator Despawn()
     {
         //We let the animation finished first 
-        yield return new WaitWhile(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime <= 1.0f);
-        yield return new WaitForSeconds(2f);
+        // yield return new WaitWhile(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime <= 1.0f);
+        //yield return new WaitForSeconds(2f);
         //We reset the stats of the object to reuse it later through the object pool 
+        yield return null;
         Initialize();
         gameObject.SetActive(false);
     }

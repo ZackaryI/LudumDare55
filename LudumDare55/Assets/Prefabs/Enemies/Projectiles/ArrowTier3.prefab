@@ -157,9 +157,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b8dccfaa6ccd894281806023268e2c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyProjectile: 1
   projectileDamage: 0
-  projectileSpeed: 10
-  despawnTime: 0.1
+  projectileSpeed: 15
+  despawnTime: 0.05
+  target: {fileID: 0}
   rb: {fileID: 0}
   onCollision:
     m_PersistentCalls:
@@ -179,7 +181,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2

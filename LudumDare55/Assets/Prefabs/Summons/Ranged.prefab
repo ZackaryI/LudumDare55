@@ -10,11 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 7165497288318859680}
   - component: {fileID: 2533302066061008075}
+  - component: {fileID: 2463998270263402336}
   - component: {fileID: 8681281549555377412}
   - component: {fileID: 248330591058388148}
   - component: {fileID: 2905339392927164816}
   - component: {fileID: 8197987591164821647}
-  - component: {fileID: 2463998270263402336}
+  - component: {fileID: 6465940173156036533}
   m_Layer: 0
   m_Name: Ranged
   m_TagString: Untagged
@@ -49,6 +50,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 848d9a2c75a454b48bfc0d1474857951, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  layers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  radiusCap: 100
+  target: {fileID: 0}
+  summonTypeSO: {fileID: 11400000, guid: 971a50336bffaab479338158d6ff5f72, type: 2}
+  summonRangeOfAttack: 0
+  summonHP: 0
+  summonTier: 1
+  colliderAttack: {fileID: 0}
+  animator: {fileID: 0}
+  onDeathEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  onHitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  onHealthChange:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &2463998270263402336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4732578867008937101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9679e68a0f1144e79c664d9a11ca121, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1073741824
+  target: {fileID: 0}
+  useRotation: 0
 --- !u!70 &8681281549555377412
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -78,7 +114,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -185,7 +221,7 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  endReachedDistance: 0.2
+  endReachedDistance: 2
   whenCloseToDestination: 0
   rvoDensityBehavior:
     enabled: 1
@@ -197,7 +233,7 @@ MonoBehaviour:
   repathRateCompatibility: NaN
   canSearchCompability: 0
   orientation: 0
-  enableRotation: 1
+  enableRotation: 0
   autoRepath:
     mode: 2
     period: 0.5
@@ -213,18 +249,24 @@ MonoBehaviour:
   slowWhenNotFacingTarget: 1
   preventMovingBackwards: 0
   constrainInsideGraph: 0
---- !u!114 &2463998270263402336
-MonoBehaviour:
+--- !u!95 &6465940173156036533
+Animator:
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4732578867008937101}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9679e68a0f1144e79c664d9a11ca121, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 1073741824
-  target: {fileID: 0}
-  useRotation: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

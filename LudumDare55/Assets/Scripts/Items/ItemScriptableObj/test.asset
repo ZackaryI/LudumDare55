@@ -19,4 +19,5 @@ MonoBehaviour:
   summonCapacityBonus: 1
   isWeapon: 1
   weaponAttributes: {fileID: 11400000, guid: 470d51942e1222e49983e2f15a19084e, type: 2}
-  droppedItem: {fileID: -8382510622623036780, guid: 0016371475114084f825fb79c195485b, type: 3}
+  droppedItem: {fileID: 6782112000774328139, guid: 0016371475114084f825fb79c195485b, type: 3}
+  Icon: {fileID: 21300000, guid: 46d6eb752867d6940a171f5e3b957bc5, type: 3}

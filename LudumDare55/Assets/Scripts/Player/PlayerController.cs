@@ -1,10 +1,13 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] PlayerAttributes playerAttributes;
     [SerializeField] WeaponAttributes weaponAttributes;
     [SerializeField] ItemAttrubutes startingWeapon;
+    [SerializeField] GameObject iventory;
+    [SerializeField] Image[] icons;
 
     Rigidbody2D playerRigidbody;
     Camera cam;
@@ -17,19 +20,29 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        ItemHandler(startingWeapon);
+
 
         playerRigidbody = GetComponent<Rigidbody2D>();
         cam = Camera.main;
 
         health = new(playerAttributes.health, DoAtDeath, DoAtDamage, 0);
         playerMovement = new();
-        itemTracker = new (transform, this);
+        itemTracker = new (transform, this, icons);
+
+        ItemHandler(startingWeapon);
 
         weaponCoolDwonTimer = 0;
     }
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.B) && iventory.activeInHierarchy == false)
+        {
+            iventory.SetActive(true);
+        }
+        else if (Input.GetKeyDown(KeyCode.B) && iventory.activeInHierarchy) 
+        {
+            iventory.SetActive(false);
+        }
         if (Input.GetKeyDown(KeyCode.Space) && weaponCoolDwonTimer <= 0)
         {
             playerWeapon.Attack();

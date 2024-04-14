@@ -22,10 +22,10 @@ public class Item : MonoBehaviour
     private void Start()
     {
         isPlayerInRange = false;
-        damageBonusText.text = "Damage: +" + itemAttrubutes.damageBonus;
-        speedBonusText.text = "Speed: +" + itemAttrubutes.speedBonus;
-        hpBonusText.text = "Hp: +" + itemAttrubutes.hpBonus;
-        summonCapacityBonusText.text = "SummonCap: +" + itemAttrubutes.summonCapacityBonus; 
+        damageBonusText.text = itemAttrubutes.damageBonus.ToString();
+        speedBonusText.text = itemAttrubutes.speedBonus.ToString();
+        hpBonusText.text = itemAttrubutes.hpBonus.ToString();
+        summonCapacityBonusText.text = itemAttrubutes.summonCapacityBonus.ToString(); 
     }
     private void Update()
     {
@@ -60,10 +60,10 @@ public class Item : MonoBehaviour
 
         if (itemData == null) { return; }
 
-        damageBonusTextEquiped.text = "Damage: +" + itemData.damageBonus;
-        speedBonusTextEquiped.text = "Speed: +" + itemData.speedBonus;
-        hpBonusTextEquiped.text = "Hp: +" + itemData.hpBonus;
-        summonCapacityBonusTextEquiped.text = "SummonCap: +" + itemData.summonCapacityBonus;
+        damageBonusTextEquiped.text = itemData.damageBonus.ToString();
+        speedBonusTextEquiped.text = itemData.speedBonus.ToString();
+        hpBonusTextEquiped.text = itemData.hpBonus.ToString();
+        summonCapacityBonusTextEquiped.text = itemData.summonCapacityBonus.ToString();
         displayStatsEquiped.SetActive(isDisplayed);
     }
 }

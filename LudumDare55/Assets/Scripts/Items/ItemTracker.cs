@@ -36,7 +36,7 @@ public class ItemTracker
         TossUnequipedItem(items[key].droppedItem);
         items.Remove(key);
     }
-    public void TossUnequipedItem(Rigidbody2D item)
+    public void TossUnequipedItem(Transform item)
     {
         Object.Instantiate(item, playerPosition.position, Quaternion.identity);
     }

@@ -4,6 +4,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] PlayerAttributes playerAttributes;
     [SerializeField] WeaponAttributes weaponAttributes;
+    [SerializeField] ItemAttrubutes startingWeapon;
 
     Rigidbody2D playerRigidbody;
     Camera cam;
@@ -11,15 +12,33 @@ public class PlayerController : MonoBehaviour
     Health health;
     PlayerMovement playerMovement;
     ItemTracker itemTracker;
+    PlayerWeapon playerWeapon;
+    float weaponCoolDwonTimer;
 
     private void Start()
     {
+        ItemHandler(startingWeapon);
+
         playerRigidbody = GetComponent<Rigidbody2D>();
         cam = Camera.main;
 
         health = new(playerAttributes.health, DoAtDeath, DoAtDamage, 0);
         playerMovement = new();
-        itemTracker = new ItemTracker(transform, this);
+        itemTracker = new (transform, this);
+
+        weaponCoolDwonTimer = 0;
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && weaponCoolDwonTimer <= 0)
+        {
+            playerWeapon.Attack();
+            weaponCoolDwonTimer = weaponAttributes.attackSpeed;
+        }
+        else if(weaponCoolDwonTimer > 0)
+        {
+            weaponCoolDwonTimer -= Time.deltaTime;
+        }
     }
     private void FixedUpdate()
     {
@@ -30,12 +49,16 @@ public class PlayerController : MonoBehaviour
     //item related methods
     public void ItemHandler(ItemAttrubutes itemAttrubutes)
     {
-        if (itemAttrubutes.isWeapon) 
+        itemTracker.AddItem(itemAttrubutes);
+
+        if (itemAttrubutes.isWeapon)
         {
             weaponAttributes = itemAttrubutes.weaponAttributes;
+            playerWeapon = new(weaponAttributes, itemTracker.GetDamageBonus());
+            return;
         }
 
-        itemTracker.AddItem(itemAttrubutes);
+        playerWeapon.UpdateDamageBonus(itemTracker.GetDamageBonus());
     }
     public ItemAttrubutes DisplayItemData(byte index) 
     {

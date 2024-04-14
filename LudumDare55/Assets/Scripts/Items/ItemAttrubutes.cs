@@ -11,10 +11,11 @@ public class ItemAttrubutes : ScriptableObject
     public float damageBonus;
     public float speedBonus;
     public float hpBonus;
-    public float summonCapacityBonus;
+    public float summonCapacityBonus; // not implamented yet
 
     public bool isWeapon;
     public WeaponAttributes weaponAttributes;
 
-    public Rigidbody2D droppedItem;
+    public Transform droppedItem;
+    public Sprite Icon;
 }

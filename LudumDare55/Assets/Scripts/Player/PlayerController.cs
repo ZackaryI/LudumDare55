@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Image[] icons;
 
     Rigidbody2D playerRigidbody;
+    SpriteRenderer playerSpriteRenderer;
     Camera cam;
 
     Health health;
@@ -19,11 +19,11 @@ public class PlayerController : MonoBehaviour
     PlayerWeapon playerWeapon;
     float weaponCoolDwonTimer;
 
+
     private void Start()
     {
-
-
         playerRigidbody = GetComponent<Rigidbody2D>();
+        playerSpriteRenderer = GetComponent<SpriteRenderer>();
         cam = Camera.main;
 
         health = new(playerAttributes.health, DoAtDeath, DoAtDamage, 0);
@@ -46,10 +46,10 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Space) && weaponCoolDwonTimer <= 0)
         {
-            playerWeapon.Attack();
+            playerWeapon.Attack(itemTracker.GetDamageBonus());
             weaponCoolDwonTimer = weaponAttributes.attackSpeed;
         }
-        else if(weaponCoolDwonTimer > 0)
+        else if(weaponCoolDwonTimer > 0 + itemTracker.GetSpeedBonus())
         {
             weaponCoolDwonTimer -= Time.deltaTime;
         }
@@ -65,14 +65,17 @@ public class PlayerController : MonoBehaviour
     {
         itemTracker.AddItem(itemAttrubutes);
 
+        if (itemAttrubutes.itemKey == 1) 
+        {
+            playerSpriteRenderer.sprite = itemAttrubutes.playerSprite;
+        }
+
         if (itemAttrubutes.isWeapon)
         {
             weaponAttributes = itemAttrubutes.weaponAttributes;
-            playerWeapon = new(weaponAttributes, itemTracker.GetDamageBonus());
+            playerWeapon = new(weaponAttributes);
             return;
         }
-
-        playerWeapon.UpdateDamageBonus(itemTracker.GetDamageBonus());
     }
     public ItemAttrubutes DisplayItemData(byte index) 
     {

@@ -149,10 +149,12 @@ public class PlayerController : MonoBehaviour
     IEnumerator SpawnSummon(GameObject summon)
     {
         yield return new WaitForSeconds(.6f);
-        Vector3 mousePos = Input.mousePosition;
+        /*Vector3 mousePos = Input.mousePosition;
         mousePos = cam.ScreenToWorldPoint(mousePos);
-        Vector3 offset = new(0, 0, 10);
-        Instantiate(summon, mousePos + offset, Quaternion.identity);
+        
+        Instantiate(summon, mousePos + offset, Quaternion.identity);*/
+        Vector3 offset = new(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+        Instantiate(summon, transform.position + offset, Quaternion.identity);
     }
     public void PlayerFootsteps()
     {

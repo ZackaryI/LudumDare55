@@ -46,6 +46,7 @@ public class PlayerWeapon
         spawnedProjectile.projectileDamage = weaponAttributes.damage + bonus;
         spawnedProjectile.enemyProjectile = false;
         spawnedProjectile.playerProjectile = true;
+        spawnedProjectile.GetComponent<EnemyDamageOnEnter>().damage = 0;
 
         Vector2 target = playerPosition.position + playerPosition.transform.up * 5;
         GameObject tempTarget = new();

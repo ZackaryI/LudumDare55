@@ -57,7 +57,7 @@ public class Projectile : MonoBehaviour
         if(enemyProjectile == true)
         { 
             if(collision.gameObject.GetComponent<PlayerController>() != null && collision != lastCollider)
-            { 
+            {
                 lastCollider = collision;
                 collision.gameObject.GetComponent<PlayerController>().TakeDamage(projectileDamage);
                 onCollision?.Invoke();

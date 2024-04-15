@@ -91,7 +91,7 @@ public class RoomManager : MonoBehaviour
     }
     void onEndOfRoom()
     {
-
+        List<int> rewardsPicked = new List<int>(); 
         onEndOfRoomEvent?.Invoke();
         for (int x = 0; x < blockEscapes.Count; x++)
         {
@@ -113,7 +113,12 @@ public class RoomManager : MonoBehaviour
             for (int x = 0; x < numberOfDrops; x++)
             {
 
-                int rand = Random.Range(0, rewards.Count-1);
+                int rand = Random.Range(0, rewards.Count - 1);
+                while (rewardsPicked.Contains(rand) == true)
+                {
+                    rand = Random.Range(0, rewards.Count - 1);
+                }
+                rewardsPicked.Add(rand); 
                 GameObject e = Instantiate(rewards[rand]);
                 var randomPos = (Vector3)Random.insideUnitCircle * 5;
                 randomPos += rewardPickupSpot.transform.position;

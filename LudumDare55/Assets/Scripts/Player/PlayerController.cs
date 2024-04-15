@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +13,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject LoseScreen;
     [SerializeField] Slider healthbar;
     [SerializeField] TextMeshProUGUI summonTracker;
+    [SerializeField] AudioSource audioSource;
 
     Rigidbody2D playerRigidbody;
     SpriteRenderer playerSpriteRenderer;
@@ -26,6 +28,7 @@ public class PlayerController : MonoBehaviour
     float weaponCoolDwonTimer;
     short currentSummonAmount;
     GameObject currentSummonAbility;
+    bool isPlayingFootstep = false;
 
     private void Start()
     {
@@ -47,9 +50,10 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) && currentSummonAmount + 1 <= playerAttributes.maxSummons + itemTracker.GetSummonCapacityBonus())
+        if (Input.GetKeyDown(KeyCode.Mouse0) && currentSummonAmount + 1 <= playerAttributes.maxSummons + itemTracker.GetSummonCapacityBonus() && weaponCoolDwonTimer <= 0 + itemTracker.GetSpeedBonus())
         {
             AddSummon(currentSummonAbility);
+            weaponCoolDwonTimer += 1f;
         }
         if (Input.GetKeyDown(KeyCode.B) && iventory.activeInHierarchy == false)
         {
@@ -66,10 +70,26 @@ public class PlayerController : MonoBehaviour
                 if (DisplayItemData(0).isMagic)
                 {
                     playerWeapon.Attack(itemTracker.GetDamageBonus(), DisplayItemData(0).ammo, meleeAttack);
+
+                    AudioSource tempAudio = Instantiate(audioSource, transform.position, Quaternion.identity);
+                    tempAudio.clip = playerAttributes.MagicLayer3;
+                    tempAudio.Play();
+
+                    tempAudio = Instantiate(audioSource, transform.position, Quaternion.identity);
+                    tempAudio.clip = playerAttributes.MagicLayer1[Random.Range(0, playerAttributes.MagicLayer1.Length - 1)];
+                    tempAudio.Play();
+
+                    tempAudio = Instantiate(audioSource, transform.position, Quaternion.identity);
+                    tempAudio.clip = playerAttributes.MagicLayer2[Random.Range(0, playerAttributes.MagicLayer2.Length - 1)];
+                    tempAudio.Play();
                 }
                 else 
                 {
                     playerWeapon.Attack(itemTracker.GetDamageBonus(), DisplayItemData(4).ammo, meleeAttack);
+
+                    AudioSource tempAudio = Instantiate(audioSource, transform.position, Quaternion.identity);
+                    tempAudio.clip = playerAttributes.bowShots[Random.Range(0, playerAttributes.bowShots.Length - 1)];
+                    tempAudio.Play();
                 }
             }
             catch 
@@ -87,6 +107,11 @@ public class PlayerController : MonoBehaviour
     {
         playerMovement.Movement(playerRigidbody, playerAttributes);
         playerMovement.RotatePlayer(cam, transform);
+
+        if ((Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0) && isPlayingFootstep == false) 
+        {
+            StartCoroutine(PlayerFootsteps(playerAttributes.walkingSound));
+        }
     }
     //Summon related methods
     public void RemoveSummon() 
@@ -96,16 +121,35 @@ public class PlayerController : MonoBehaviour
     }
     public void AddSummon(GameObject summon) 
     {
-        Vector3 mousePos = Input.mousePosition;
-        mousePos = cam.ScreenToWorldPoint(mousePos);
-        Vector3 offset = new(0, 0, 10);
-        Instantiate(summon, mousePos + offset, Quaternion.identity);
+        StartCoroutine(SpawnSummon(summon));
         currentSummonAmount++;
         summonTracker.text = currentSummonAmount.ToString() + "/" + (playerAttributes.maxSummons + itemTracker.GetSummonCapacityBonus());
+
+        AudioSource audio = Instantiate(audioSource, transform.position, Quaternion.identity);
+        audio.clip = playerAttributes.summonSound;
+        audio.Play();
     }
     public void ChangeSummon(GameObject currentSummonAbility) 
     {
         this.currentSummonAbility = currentSummonAbility;
+    }
+    IEnumerator SpawnSummon(GameObject summon)
+    {
+        yield return new WaitForSeconds(.6f);
+        Vector3 mousePos = Input.mousePosition;
+        mousePos = cam.ScreenToWorldPoint(mousePos);
+        Vector3 offset = new(0, 0, 10);
+        Instantiate(summon, mousePos + offset, Quaternion.identity);
+    }
+    IEnumerator PlayerFootsteps(AudioClip[] audio)
+    {
+        isPlayingFootstep = true;
+        AudioSource tempAudio = Instantiate(audioSource, transform.position, Quaternion.identity);
+        tempAudio.clip = playerAttributes.walkingSound[Random.Range(0, playerAttributes.walkingSound.Length - 1)];
+        tempAudio.Play();
+
+        yield return new WaitForSeconds(.1f);
+        isPlayingFootstep = false;
     }
     //item related methods
     public void ItemHandler(ItemAttrubutes itemAttrubutes, GameObject itemObject)
@@ -120,7 +164,7 @@ public class PlayerController : MonoBehaviour
         if (itemAttrubutes.isWeapon)
         {
             weaponAttributes = itemAttrubutes.weaponAttributes;
-            playerWeapon = new(weaponAttributes, transform);
+            playerWeapon = new(weaponAttributes, transform, playerAttributes, audioSource);
         }
     }
     public ItemAttrubutes DisplayItemData(byte index) 
@@ -162,4 +206,5 @@ public class PlayerController : MonoBehaviour
     {
         
     }
+
 }

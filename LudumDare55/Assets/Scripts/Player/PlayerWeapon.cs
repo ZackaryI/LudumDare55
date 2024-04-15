@@ -5,10 +5,14 @@ public class PlayerWeapon
 {
     WeaponAttributes weaponAttributes;
     Transform playerPosition;
-    public PlayerWeapon(WeaponAttributes weaponAttributes, Transform playerPosition) 
+    PlayerAttributes playerAttributes;
+    AudioSource audioSource;
+    public PlayerWeapon(WeaponAttributes weaponAttributes, Transform playerPosition, PlayerAttributes playerAttributes, AudioSource audioSource) 
     {
         this.weaponAttributes = weaponAttributes;
         this.playerPosition = playerPosition;
+        this.playerAttributes = playerAttributes;
+        this.audioSource = audioSource;
     }
     public void Attack(float bonus, Projectile ammo, DamageEnemy melee) 
     {
@@ -29,9 +33,12 @@ public class PlayerWeapon
     }
     void MeleeAttack(float bonus, DamageEnemy melee) 
     {
-         DamageEnemy temp = Object.Instantiate(melee, playerPosition.position, playerPosition.rotation);
-         temp.damage = weaponAttributes.damage + bonus;
+        DamageEnemy temp = Object.Instantiate(melee, playerPosition.position, playerPosition.rotation);
+        temp.damage = weaponAttributes.damage + bonus;
 
+        AudioSource tempAudio = Object.Instantiate(audioSource, playerPosition.position, Quaternion.identity);
+        tempAudio.clip = playerAttributes.swordSwing[Random.Range(0, playerAttributes.swordSwing.Length - 1)];
+        tempAudio.Play();
     }
     void RangeAttack(float bonus, Projectile ammo) 
     {

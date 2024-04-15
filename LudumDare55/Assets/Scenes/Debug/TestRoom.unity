@@ -1336,6 +1336,7 @@ MonoBehaviour:
   LoseScreen: {fileID: 1993070693}
   healthbar: {fileID: 6982517443608580767}
   summonTracker: {fileID: 1883839753}
+  audioSource: {fileID: 3426598633832435905, guid: 6c79af4f1fd3f384aa44b8ad7d4318bb, type: 3}
 --- !u!58 &534337699
 CircleCollider2D:
   m_ObjectHideFlags: 0

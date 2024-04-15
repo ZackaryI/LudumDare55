@@ -149,7 +149,7 @@ public class EnemyController : MonoBehaviour
 
             if (playerProjectile)
             {
-                charRef.ChangeSummon(enemyTypeSO.playerSummon);
+                charRef.ChangeSummon(enemyTypeSO.playerSummon, enemyTypeSO.summonIcon);
             }
 
             onDeathEvent?.Invoke(); 

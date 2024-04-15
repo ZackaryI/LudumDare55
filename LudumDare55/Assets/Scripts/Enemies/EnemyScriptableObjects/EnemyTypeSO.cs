@@ -31,6 +31,7 @@ public class EnemyTypeSO : ScriptableObject
     public List<GameObject> prefabProjectiles;
 
     public GameObject playerSummon;
+    public Sprite summonIcon;
     override public string ToString()
     {
         return "Type : " + enemyName + ", HP : " + enemyHP + ", attack : " + enemyAttack + ", speed:" + enemyMovementSpeed + ", " + enemyMovementSpeed + ", weakness:" + enemyWeakness.enemyName ; 

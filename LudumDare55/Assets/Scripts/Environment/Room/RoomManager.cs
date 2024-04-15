@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -7,6 +8,7 @@ using UnityEngine.Events;
 [RequireComponent(typeof(BoxCollider2D))]
 public class RoomManager : MonoBehaviour
 {
+    public bool bossRoom = false; 
     [Header("Text Reference")]
     public RoomStatusText roomStatus; 
     [Header("Escape Colliders")]
@@ -36,23 +38,48 @@ public class RoomManager : MonoBehaviour
         {
             blockEscapes[x].enabled = false;
         }
+        for (int i = 0; i < spawnersInRoom.Count; i++)
+        {
+            spawnersInRoom[i].gameObject.SetActive(false);
 
+        }
         roomStatus = FindObjectOfType<RoomStatusText>();
         enterTrigger = GetComponent<TriggerOnEnterExit2D>();
         enterTrigger.eventOnExit2D.AddListener(() => {checkIfCleared(); }) ;
-        enterTrigger.eventOnEnter2D.AddListener(() => {
-            onStartOfRoomEvent?.Invoke();
-            roomStatus.UpdateText("Room start !");
-            for (int x = 0; x < blockEscapes.Count; x++)
-            {
-                blockEscapes[x].enabled = true; 
-            }
-            for (int i = 0; i < spawnersInRoom.Count; i++)
-            {
-                ListEnemies.AddRange(spawnersInRoom[i].SpawnOnceWithRoom(this)); 
-                
-            }
-        });
+        if (bossRoom)
+        {
+
+            enterTrigger.eventOnEnter2D.AddListener(() => {
+                onStartOfRoomEvent?.Invoke();
+                roomStatus.UpdateText("Room start !");
+                for (int x = 0; x < blockEscapes.Count; x++)
+                {
+                    blockEscapes[x].enabled = true;
+                }
+                for (int i = 0; i < spawnersInRoom.Count; i++)
+                {
+                    spawnersInRoom[i].gameObject.SetActive(true); 
+
+                }
+            });
+        } else
+        {
+
+            enterTrigger.eventOnEnter2D.AddListener(() => {
+                onStartOfRoomEvent?.Invoke();
+                roomStatus.UpdateText("Room start !");
+                for (int x = 0; x < blockEscapes.Count; x++)
+                {
+                    blockEscapes[x].enabled = true;
+                }
+                for (int i = 0; i < spawnersInRoom.Count; i++)
+                {
+                    spawnersInRoom[i].gameObject.SetActive(true);
+                    ListEnemies.AddRange(spawnersInRoom[i].SpawnOnceWithRoom(this));
+
+                }
+            });
+        }
         foreach (Spawner item in spawnersInRoom)
         {
             foreach (Wave wave in item.waves)
@@ -91,6 +118,9 @@ public class RoomManager : MonoBehaviour
     }
     void onEndOfRoom()
     {
+        if(bossRoom == false)
+        {
+
         List<int> rewardsPicked = new List<int>(); 
         onEndOfRoomEvent?.Invoke();
         for (int x = 0; x < blockEscapes.Count; x++)
@@ -114,10 +144,26 @@ public class RoomManager : MonoBehaviour
             {
 
                 int rand = Random.Range(0, rewards.Count - 1);
-                while (rewardsPicked.Contains(rand) == true)
+                if(rewardsPicked.Count > 2)
+                { 
+                    while (rewardsPicked.Contains(rand) == true)
+                    {
+                        rand = Random.Range(0, rewards.Count - 1);
+                    }
+                } else
                 {
-                    rand = Random.Range(0, rewards.Count - 1);
+                    rand = x; 
                 }
+
+                if (rewards[rand].name.Contains("Bow"))
+                {
+                    GameObject d = rewards.Where(x => x.name == "arrow").First(); 
+                    var randPos = (Vector3)Random.insideUnitCircle * 5;
+                    randPos += rewardPickupSpot.transform.position;
+                    d.transform.position = randPos;
+                    Instantiate(d);
+                }
+                 
                 rewardsPicked.Add(rand); 
                 GameObject e = Instantiate(rewards[rand]);
                 var randomPos = (Vector3)Random.insideUnitCircle * 5;
@@ -131,6 +177,7 @@ public class RoomManager : MonoBehaviour
 
         enterTrigger.eventOnEnter2D.RemoveAllListeners();
         enterTrigger.eventOnExit2D.RemoveAllListeners();
+        }
 
     }
     // Update is called once per frame

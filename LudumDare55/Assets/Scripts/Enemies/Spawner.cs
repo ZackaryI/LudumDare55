@@ -132,7 +132,7 @@ public class Spawner : MonoBehaviour
 
                 for (int x = 0; x < currentWave.contentWave[i].waveSize; x++)
                 {
-                    Debug.Log("spawned once" + currentWave.contentWave[i].enemyType.ToString());
+                    Debug.Log("spawned once" + currentWave.contentWave[i].enemyType.ToString()); 
                     GameObject e = objPool.GetPooledObject(currentWave.contentWave[i].enemyType.ToString());
                     e.GetComponent<EnemyController>().onDeathEvent.AddListener(() => { rm.addToKill(); });
                     e.GetComponent<EnemyController>().enemyTier = currentWave.contentWave[i].enemyTier;

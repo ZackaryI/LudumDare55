@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb4b0008a033b543858873c9a4203df, type: 3}
+  m_Name: Boss
+  m_EditorClassIdentifier: 
+  enemyName: Magic
+  enemyHP: 500
+  enemyAttack: 15
+  enemyMovementSpeed: 1
+  enemyRangeOfAttack: 15
+  enemyWeakness: {fileID: 11400000, guid: 453329e4e74ed7f458d527c0f8259d6c, type: 2}
+  prefabEnemy:
+  - {fileID: 3801413901710508019, guid: 92cad482e8b6bbd4986cabbcaac0314d, type: 3}
+  prefabProjectiles:
+  - {fileID: 5483739602005422800, guid: 9c1961a251b2a0344966014771704433, type: 3}
+  playerSummon: {fileID: 7413456291293392970, guid: 4a331a8868203c84290fcb3486b3ba5e, type: 3}

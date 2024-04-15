@@ -242,6 +242,7 @@ public class SummonController : MonoBehaviour
         //allow the enemy to move again
         aiPath.canMove = true;
         yield return new WaitForSeconds(0.2f);
+        canAttack = true;
         if (colliderAttack != null && isDying == false)
         {
             colliderAttack.enabled = false;

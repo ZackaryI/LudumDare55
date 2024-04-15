@@ -100,26 +100,30 @@ public class EnemyController : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        Vector2 direction = charRef.transform.position - transform.position;
-        transform.rotation = Quaternion.FromToRotation(Vector3.up, direction);
-        checkDistance();
-        //In attack currently, we're moving the delay up 
-        if (canAttack == false)
-        {
-            aIDestinationSetter.target = null;
-            time += Time.deltaTime;
-
-            if (time > delayAttack)
-            {
-                time = 0;
-                canAttack = true;
-            }
-        } else
+    { 
+        if(charRef != null && charRef.gameObject.activeInHierarchy)
         { 
-            aIDestinationSetter.target = charRef.transform;
-        } 
-         
+            Vector2 direction = charRef.transform.position - transform.position; 
+            transform.rotation = Quaternion.FromToRotation(Vector3.up, direction);
+            checkDistance();
+            //In attack currently, we're moving the delay up 
+            if (canAttack == false)
+            {
+                aIDestinationSetter.target = null;
+                time += Time.deltaTime;
+
+                if (time > delayAttack)
+                {
+                    time = 0;
+                    canAttack = true;
+                }
+            } else
+            { 
+                aIDestinationSetter.target = charRef.transform;
+            }
+
+        }
+
     }
 
 
@@ -134,6 +138,7 @@ public class EnemyController : MonoBehaviour
 
     public void OnHit(float damage, bool playerProjectile)
     {
+        Debug.Log("hit " + this.name + "for " + damage);
         enemyHP -= damage;
         onHitEvent?.Invoke();
         onHealthChange?.Invoke((int)damage);
@@ -170,7 +175,7 @@ public class EnemyController : MonoBehaviour
         } 
         aiPath.canMove = false; 
         //animator.SetTrigger("Attack");
-        if (enemyTypeSO.prefabProjectiles.Count > 0 && isDying == false)
+        if (enemyTypeSO.prefabProjectiles.Count > 0 && isDying == false && charRef.gameObject.activeSelf)
         {
             GameObject o = Instantiate(enemyTypeSO.prefabProjectiles[enemyTier-1]);
             o.GetComponent<Projectile>().projectileDamage = enemyDamage; 
@@ -185,7 +190,7 @@ public class EnemyController : MonoBehaviour
 
     void onDeath()
     {
-
+        Debug.Log("Death called on " + this.name); 
         if (isDying == false)
         {
             //If we're doing score, add increment to score there 

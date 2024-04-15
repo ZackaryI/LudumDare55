@@ -7,6 +7,7 @@ using UnityEngine.Events;
 public class Projectile : MonoBehaviour
 {
     public bool enemyProjectile = true;
+    public bool playerProjectile = false;
     [Header("Variables")]
     public float projectileDamage;
     public int projectileSpeed = 10;
@@ -82,7 +83,7 @@ public class Projectile : MonoBehaviour
             if (collision.gameObject.GetComponent<EnemyController>() != null && collision != lastCollider)
             {
                 lastCollider = collision;
-                collision.gameObject.GetComponent<EnemyController>().OnHit(projectileDamage);
+                collision.gameObject.GetComponent<EnemyController>().OnHit(projectileDamage, playerProjectile);
                 onCollision?.Invoke();
                 StartCoroutine(Despawn());
             }

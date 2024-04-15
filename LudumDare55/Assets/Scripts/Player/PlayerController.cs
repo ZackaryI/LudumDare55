@@ -1,13 +1,17 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] PlayerAttributes playerAttributes;
-    [SerializeField] WeaponAttributes weaponAttributes;
     [SerializeField] ItemAttrubutes startingWeapon;
     [SerializeField] GameObject iventory;
     [SerializeField] Image[] icons;
+    [SerializeField] DamageEnemy meleeAttack;
+    [SerializeField] GameObject LoseScreen;
+    [SerializeField] Slider healthbar;
+    [SerializeField] TextMeshProUGUI summonTracker;
 
     Rigidbody2D playerRigidbody;
     SpriteRenderer playerSpriteRenderer;
@@ -17,8 +21,11 @@ public class PlayerController : MonoBehaviour
     PlayerMovement playerMovement;
     ItemTracker itemTracker;
     PlayerWeapon playerWeapon;
-    float weaponCoolDwonTimer;
+    WeaponAttributes weaponAttributes;
 
+    float weaponCoolDwonTimer;
+    short currentSummonAmount;
+    GameObject currentSummonAbility;
 
     private void Start()
     {
@@ -26,16 +33,24 @@ public class PlayerController : MonoBehaviour
         playerSpriteRenderer = GetComponent<SpriteRenderer>();
         cam = Camera.main;
 
-        health = new(playerAttributes.health, DoAtDeath, DoAtDamage, 0);
+        health = new(playerAttributes.health, DoAtDeath, DoAtDamage,0, healthbar);
         playerMovement = new();
         itemTracker = new (transform, this, icons);
 
-        ItemHandler(startingWeapon);
+        ItemHandler(startingWeapon, null);
 
         weaponCoolDwonTimer = 0;
+        currentSummonAmount = 0;
+        currentSummonAbility = playerAttributes.DefualtSpawn;
+
+        summonTracker.text = currentSummonAmount.ToString() + "/" + (playerAttributes.maxSummons + itemTracker.GetSummonCapacityBonus());
     }
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Mouse0) && currentSummonAmount + 1 <= playerAttributes.maxSummons + itemTracker.GetSummonCapacityBonus())
+        {
+            AddSummon(currentSummonAbility);
+        }
         if (Input.GetKeyDown(KeyCode.B) && iventory.activeInHierarchy == false)
         {
             iventory.SetActive(true);
@@ -44,9 +59,23 @@ public class PlayerController : MonoBehaviour
         {
             iventory.SetActive(false);
         }
-        if (Input.GetKeyDown(KeyCode.Space) && weaponCoolDwonTimer <= 0)
+        if (Input.GetKeyDown(KeyCode.Space) && weaponCoolDwonTimer <= 0 + itemTracker.GetSpeedBonus())
         {
-            playerWeapon.Attack(itemTracker.GetDamageBonus());
+            try
+            {            
+                if (DisplayItemData(0).isMagic)
+                {
+                    playerWeapon.Attack(itemTracker.GetDamageBonus(), DisplayItemData(0).ammo, meleeAttack);
+                }
+                else 
+                {
+                    playerWeapon.Attack(itemTracker.GetDamageBonus(), DisplayItemData(4).ammo, meleeAttack);
+                }
+            }
+            catch 
+            {
+                playerWeapon.Attack(itemTracker.GetDamageBonus(), null, meleeAttack);
+            }
             weaponCoolDwonTimer = weaponAttributes.attackSpeed;
         }
         else if(weaponCoolDwonTimer > 0 + itemTracker.GetSpeedBonus())
@@ -59,11 +88,29 @@ public class PlayerController : MonoBehaviour
         playerMovement.Movement(playerRigidbody, playerAttributes);
         playerMovement.RotatePlayer(cam, transform);
     }
-
-    //item related methods
-    public void ItemHandler(ItemAttrubutes itemAttrubutes)
+    //Summon related methods
+    public void RemoveSummon() 
     {
-        itemTracker.AddItem(itemAttrubutes);
+        currentSummonAmount--;
+        summonTracker.text = currentSummonAmount.ToString() + "/" + (playerAttributes.maxSummons + itemTracker.GetSummonCapacityBonus());
+    }
+    public void AddSummon(GameObject summon) 
+    {
+        Vector3 mousePos = Input.mousePosition;
+        mousePos = cam.ScreenToWorldPoint(mousePos);
+        Vector3 offset = new(0, 0, 10);
+        Instantiate(summon, mousePos + offset, Quaternion.identity);
+        currentSummonAmount++;
+        summonTracker.text = currentSummonAmount.ToString() + "/" + (playerAttributes.maxSummons + itemTracker.GetSummonCapacityBonus());
+    }
+    public void ChangeSummon(GameObject currentSummonAbility) 
+    {
+        this.currentSummonAbility = currentSummonAbility;
+    }
+    //item related methods
+    public void ItemHandler(ItemAttrubutes itemAttrubutes, GameObject itemObject)
+    {
+        itemTracker.AddItem(itemAttrubutes, itemObject);
 
         if (itemAttrubutes.itemKey == 1) 
         {
@@ -73,8 +120,7 @@ public class PlayerController : MonoBehaviour
         if (itemAttrubutes.isWeapon)
         {
             weaponAttributes = itemAttrubutes.weaponAttributes;
-            playerWeapon = new(weaponAttributes);
-            return;
+            playerWeapon = new(weaponAttributes, transform);
         }
     }
     public ItemAttrubutes DisplayItemData(byte index) 
@@ -101,7 +147,7 @@ public class PlayerController : MonoBehaviour
     }
     public void UpdateHealth(float bonus) 
     {
-        health = new(playerAttributes.health, DoAtDeath, DoAtDamage, bonus, health.GetHealth());
+        health = new(playerAttributes.health, DoAtDeath, DoAtDamage, bonus, healthbar,health.GetHealth());
     }
     public void TakeDamage(float dmg)
     {
@@ -109,10 +155,11 @@ public class PlayerController : MonoBehaviour
     }
     void DoAtDeath()
     {
-        Debug.Log("Not implamented");
+        LoseScreen.SetActive(true);
+        gameObject.SetActive(false);
     }
     void DoAtDamage() 
     {
-        Debug.Log("Not implamented");
+        
     }
 }

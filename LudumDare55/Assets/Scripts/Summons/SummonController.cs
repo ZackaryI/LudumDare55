@@ -192,6 +192,7 @@ public class SummonController : MonoBehaviour
 
         if (summonHP < 0)
         {
+            charRef.RemoveSummon();
             onDeathEvent?.Invoke();
         }
     }

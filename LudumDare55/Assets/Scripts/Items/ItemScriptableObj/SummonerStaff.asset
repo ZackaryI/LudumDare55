@@ -18,7 +18,9 @@ MonoBehaviour:
   hpBonus: 1
   summonCapacityBonus: 2
   isWeapon: 1
+  isMagic: 1
   weaponAttributes: {fileID: 11400000, guid: 470d51942e1222e49983e2f15a19084e, type: 2}
   droppedItem: {fileID: 4987004502726727670, guid: 342ffa3cdbed39f4d9fc05a0cf254c11, type: 3}
   Icon: {fileID: 21300000, guid: f75733c93cc7a9a49a7f2a092c93a24d, type: 3}
   playerSprite: {fileID: 0}
+  ammo: {fileID: 4073000190474933848, guid: 5dae1e669064be74e9eb0398a163bcff, type: 3}

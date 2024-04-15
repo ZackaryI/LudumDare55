@@ -1,4 +1,5 @@
 using System;
+using UnityEngine.UI;
 
 public class Health
 {
@@ -6,8 +7,9 @@ public class Health
     float curHealth;
     Action doAtDeath;
     Action doAtDamage;
+    Slider healthbar;
 
-    public Health(float health, Action doAtDeath, Action doAtDamage, float bonus, float currentHealth = 0) 
+    public Health(float health, Action doAtDeath, Action doAtDamage, float bonus, Slider healthbar, float currentHealth = 0) 
     {
         this.health = health + bonus;
 
@@ -22,13 +24,18 @@ public class Health
 
         this.doAtDeath = doAtDeath;
         this.doAtDamage = doAtDamage;
+        this.healthbar = healthbar;
+
+        healthbar.value = curHealth / health;
     }
     public void TakeDamage(float dmg) 
     {
-        health -= dmg;
+        curHealth -= dmg;
+        healthbar.value = curHealth / health;
+
         doAtDamage();
 
-        if (health <= 0) 
+        if (curHealth <= 0) 
         {
             doAtDeath();
         }
@@ -36,6 +43,9 @@ public class Health
     public void Heal(float amount) 
     {
         curHealth = curHealth + amount < health ? curHealth + amount : health;
+
+        healthbar.value = curHealth / health;
     }
+ 
     public float GetHealth() { return curHealth; }
 }

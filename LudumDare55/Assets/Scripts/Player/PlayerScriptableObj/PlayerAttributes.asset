@@ -17,3 +17,44 @@ MonoBehaviour:
   itemThowSpeed: 1000
   maxSummons: 3
   DefualtSpawn: {fileID: 3230026574363378455, guid: f8a11d7c15331b946adc57f3e558376f, type: 3}
+  walkingSound:
+  - {fileID: 8300000, guid: 0bf67aec29c8aea48b6c43c6c588a4a8, type: 3}
+  - {fileID: 8300000, guid: 904eb2b8ca4b3014a9d39c2f6dbd9b9f, type: 3}
+  - {fileID: 8300000, guid: 11e1f4af46d9e8040beeb8f2b5f3ab3d, type: 3}
+  - {fileID: 8300000, guid: 298fad7949b2466429a18362d0bca2a6, type: 3}
+  - {fileID: 8300000, guid: 7f53c160dcee30145b44a5cb60d7a41c, type: 3}
+  summonSound: {fileID: 8300000, guid: 3abce3bfe0fd17f42a6385d2efee3830, type: 3}
+  swordSwing:
+  - {fileID: 8300000, guid: f33c65b4193f35840832f3f4c4ecb66f, type: 3}
+  - {fileID: 8300000, guid: 88cc6d4996c399c45a754956ddce6fbc, type: 3}
+  - {fileID: 8300000, guid: d2d295615c9546d4c9942d2c696ed563, type: 3}
+  - {fileID: 8300000, guid: 5979acd71aaebfe42aeca9dc7ceb5d04, type: 3}
+  - {fileID: 8300000, guid: 1e54c4803dbfcfe42b0c19927c3b47d0, type: 3}
+  - {fileID: 8300000, guid: 4c77003f6e4c9ac4184c7e12601a133f, type: 3}
+  - {fileID: 8300000, guid: 79675ba9c0eee1049a2e7c9042180218, type: 3}
+  - {fileID: 8300000, guid: 5c628755ca21f5b4a894b052b9b3aeb0, type: 3}
+  - {fileID: 8300000, guid: 62ba12dbec7d6bd4ab526177d9db2384, type: 3}
+  - {fileID: 8300000, guid: 170e4fdf5172c37478c4689b5ca961d4, type: 3}
+  - {fileID: 8300000, guid: 2b1f7825b43f45a419bb5351da9ebcc9, type: 3}
+  - {fileID: 8300000, guid: 3857338ba97a59e4da537f017b12b626, type: 3}
+  bowShots:
+  - {fileID: 8300000, guid: a38c4989192a196458efc0de07589585, type: 3}
+  - {fileID: 8300000, guid: 061ebb804d493c448aa54fc277cb2d08, type: 3}
+  - {fileID: 8300000, guid: 0d18667335da12c459d354799ac71781, type: 3}
+  - {fileID: 8300000, guid: e4066a473d1728e4da269012b2cb97f6, type: 3}
+  - {fileID: 8300000, guid: c17e5af7d4e02844cb19ac2ded04ae31, type: 3}
+  - {fileID: 8300000, guid: 5ea5152b0e53e44419cad4847d9a5f47, type: 3}
+  - {fileID: 8300000, guid: 1948a83c9f118a44488176513e154e84, type: 3}
+  MagicLayer1:
+  - {fileID: 8300000, guid: 9c3073549576be0408ca338906945537, type: 3}
+  - {fileID: 8300000, guid: c429285b15eb4cc4e8ad4bd9be2d9179, type: 3}
+  - {fileID: 8300000, guid: 9001a8221e64f2346bc165b037f0c6b5, type: 3}
+  - {fileID: 8300000, guid: 0da1ffa232bc38a4b8d6dfe656dcd68a, type: 3}
+  - {fileID: 8300000, guid: f68c0a642d5f96f479654c837a827d88, type: 3}
+  MagicLayer2:
+  - {fileID: 8300000, guid: 1779c451a3846a24ba1b743ff7beaf53, type: 3}
+  - {fileID: 8300000, guid: a5ff6e5427eb0bf4cadac11d2a036f5c, type: 3}
+  - {fileID: 8300000, guid: 431f2490c512a7f42819073c7cb9e0fc, type: 3}
+  - {fileID: 8300000, guid: 2f7201ffa320ca2428377e6843680709, type: 3}
+  - {fileID: 8300000, guid: 4e8cd0bcbc614ea45ac1bbb200e84e41, type: 3}
+  MagicLayer3: {fileID: 8300000, guid: d09078d13a989dc43a690eea386a6867, type: 3}

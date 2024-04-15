@@ -27,3 +27,4 @@ MonoBehaviour:
   - {fileID: 8013429102457853017, guid: 2e0f9459dab8fa648bba187afe4e9520, type: 3}
   - {fileID: 2710903020348880388, guid: 086d47e6532aa2f4aa6efc4412b83eab, type: 3}
   playerSummon: {fileID: 4732578867008937101, guid: cac1784d41237954780be885926837e7, type: 3}
+  summonIcon: {fileID: 21300000, guid: e7b6977d97037554583d464719ec3505, type: 3}

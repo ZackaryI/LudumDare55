@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Slider healthbar;
     [SerializeField] TextMeshProUGUI summonTracker;
     [SerializeField] AudioSource audioSource;
-
+    [SerializeField] Image summonIconDisplay;
 
     Rigidbody2D playerRigidbody;
     SpriteRenderer playerSpriteRenderer;
@@ -31,7 +31,6 @@ public class PlayerController : MonoBehaviour
     float weaponCoolDwonTimer;
     short currentSummonAmount;
     GameObject currentSummonAbility;
-    bool isPlayingFootstep = false;
 
     private void Start()
     {
@@ -64,7 +63,6 @@ public class PlayerController : MonoBehaviour
 
             if (exists == true)
             {
-
                 animator.SetBool("isWalking", false);
             }
         }
@@ -143,9 +141,10 @@ public class PlayerController : MonoBehaviour
         audio.clip = playerAttributes.summonSound;
         audio.Play();
     }
-    public void ChangeSummon(GameObject currentSummonAbility) 
+    public void ChangeSummon(GameObject currentSummonAbility, Sprite summonIcon) 
     {
         this.currentSummonAbility = currentSummonAbility;
+        summonIconDisplay.sprite = summonIcon;
     }
     IEnumerator SpawnSummon(GameObject summon)
     {
@@ -157,11 +156,9 @@ public class PlayerController : MonoBehaviour
     }
     public void PlayerFootsteps()
     {
-        isPlayingFootstep = true;
         AudioSource tempAudio = Instantiate(audioSource, transform.position, Quaternion.identity);
         tempAudio.clip = playerAttributes.walkingSound[Random.Range(0, playerAttributes.walkingSound.Length - 1)];
         tempAudio.Play();
-        isPlayingFootstep = false;
     }
     //item related methods
     public void ItemHandler(ItemAttrubutes itemAttrubutes, GameObject itemObject)
@@ -178,6 +175,8 @@ public class PlayerController : MonoBehaviour
             weaponAttributes = itemAttrubutes.weaponAttributes;
             playerWeapon = new(weaponAttributes, transform, playerAttributes, audioSource);
         }
+
+        summonTracker.text = currentSummonAmount.ToString() + "/" + (playerAttributes.maxSummons + itemTracker.GetSummonCapacityBonus());
     }
     public ItemAttrubutes DisplayItemData(byte index) 
     {

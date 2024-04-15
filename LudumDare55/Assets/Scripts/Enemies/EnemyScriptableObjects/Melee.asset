@@ -22,3 +22,4 @@ MonoBehaviour:
   - {fileID: 4986267496387649851, guid: 6799aa696d89e374d98465179fdb887b, type: 3}
   prefabProjectiles: []
   playerSummon: {fileID: 3230026574363378455, guid: f8a11d7c15331b946adc57f3e558376f, type: 3}
+  summonIcon: {fileID: 21300000, guid: 5a4838399ea75d649bca22daf6c4376e, type: 3}

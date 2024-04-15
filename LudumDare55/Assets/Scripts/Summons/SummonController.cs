@@ -197,7 +197,6 @@ public class SummonController : MonoBehaviour
 
         if (summonHP < 0)
         {
-            charRef.RemoveSummon();
             onDeathEvent?.Invoke();
         }
     }
@@ -270,6 +269,7 @@ public class SummonController : MonoBehaviour
         yield return new WaitForSeconds(2f);
         //We reset the stats of the object to reuse it later through the object pool 
         Initialize();
+        charRef.RemoveSummon();
         gameObject.SetActive(false);
     }
 }

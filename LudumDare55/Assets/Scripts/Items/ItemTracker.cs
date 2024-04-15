@@ -22,7 +22,7 @@ public class ItemTracker
         items = new ();
     }
 
-    public void AddItem(ItemAttrubutes item) 
+    public void AddItem(ItemAttrubutes item, GameObject itemObject) 
     {
         if (items.ContainsKey(item.itemKey)) 
         {
@@ -35,6 +35,11 @@ public class ItemTracker
         
         icons[item.itemKey].sprite = item.Icon;
         icons[item.itemKey].color = new Color(255, 255, 255, 255);
+
+        if (itemObject != null)
+        {
+            UnityEngine.Object.Destroy(itemObject);
+        }
     }
     public void RemoveItem(byte key) 
     {
@@ -47,7 +52,8 @@ public class ItemTracker
     }
     public void TossUnequipedItem(Transform item)
     {
-        Object.Instantiate(item, playerPosition.position, Quaternion.identity);
+        Vector3 randomOffset = new Vector2(Random.Range(-1, 1), Random.Range(-1, 1));
+        Object.Instantiate(item, playerPosition.position + randomOffset, Quaternion.identity);
     }
     public float GetDamageBonus()
     {

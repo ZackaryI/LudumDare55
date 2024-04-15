@@ -128,14 +128,21 @@ public class EnemyController : MonoBehaviour
     { 
     }
 
-    public void OnHit(float damage)
+    public void OnHit(float damage, bool playerProjectile)
     {
         enemyHP -= damage;
         onHitEvent?.Invoke();
-        onHealthChange?.Invoke((int)damage); 
+        onHealthChange?.Invoke((int)damage);
+
 
         if(enemyHP < 0)
         {
+
+            if (playerProjectile)
+            {
+                charRef.ChangeSummon(enemyTypeSO.playerSummon);
+            }
+
             onDeathEvent?.Invoke(); 
         }
     }

@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a2b61105e2a564a4baa5e49c5780b611, type: 3}
-  m_Name: Scimitar
+  m_Name: Arrow
   m_EditorClassIdentifier: 
-  itemKey: 0
-  damageBonus: 9
-  speedBonus: 1
-  hpBonus: 1
+  itemKey: 4
+  damageBonus: 1
+  speedBonus: 0
+  hpBonus: 0
   summonCapacityBonus: 0
-  isWeapon: 1
+  isWeapon: 0
   isMagic: 0
-  weaponAttributes: {fileID: 11400000, guid: b38abf889f75ce643b915e92ecdf7387, type: 2}
-  droppedItem: {fileID: 5157317205410757025, guid: b7cd5e663a7f0c0458a596e3221f9c91, type: 3}
-  Icon: {fileID: 21300000, guid: fcd627f2a746e6342a66903e37f24784, type: 3}
+  weaponAttributes: {fileID: 0}
+  droppedItem: {fileID: 0}
+  Icon: {fileID: 21300000, guid: 4c578225c710fae4b8f93394ac83927f, type: 3}
   playerSprite: {fileID: 0}
-  ammo: {fileID: 0}
+  ammo: {fileID: -8151778412635853702, guid: 3324cd2f591801641beaaeb57732cda7, type: 3}

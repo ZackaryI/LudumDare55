@@ -14,9 +14,11 @@ public class ItemAttrubutes : ScriptableObject
     public float summonCapacityBonus; // not implamented yet
 
     public bool isWeapon;
+    public bool isMagic;
     public WeaponAttributes weaponAttributes;
 
     public Transform droppedItem;
     public Sprite Icon;
     public Sprite playerSprite;
+    public Projectile ammo;
 }

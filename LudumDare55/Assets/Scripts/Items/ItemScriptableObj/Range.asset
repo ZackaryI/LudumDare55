@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f23ddf5e9222f514d89709bcd02ba13b, type: 3}
-  m_Name: PlayerAttributes
+  m_Script: {fileID: 11500000, guid: f83d87cbaeaba024c90354bc5b0c5572, type: 3}
+  m_Name: Range
   m_EditorClassIdentifier: 
-  health: 100
-  playerMoveSpeed: 10
-  itemThowSpeed: 1000
-  maxSummons: 3
-  DefualtSpawn: {fileID: 3230026574363378455, guid: f8a11d7c15331b946adc57f3e558376f, type: 3}
+  isMelee: 0
+  damage: 0
+  attackSpeed: 1
+  projectileSpeed: 0
+  projectile: {fileID: 0}

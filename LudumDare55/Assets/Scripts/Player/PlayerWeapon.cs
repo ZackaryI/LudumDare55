@@ -1,34 +1,49 @@
 
-using System;
+using UnityEngine;
 
 public class PlayerWeapon
 {
     WeaponAttributes weaponAttributes;
-    public PlayerWeapon(WeaponAttributes weaponAttributes) 
+    Transform playerPosition;
+    public PlayerWeapon(WeaponAttributes weaponAttributes, Transform playerPosition) 
     {
         this.weaponAttributes = weaponAttributes;
+        this.playerPosition = playerPosition;
     }
-    public void Attack(float bonus) 
+    public void Attack(float bonus, Projectile ammo, DamageEnemy melee) 
     {
-        /*
-           shoots projectile
-           or does melee attack
-        */
         if (weaponAttributes.isMelee)
         {
-            meleeAttack(bonus);
+            MeleeAttack(bonus, melee);
         }
-        else 
+
+        if (ammo == null) 
         {
-            RangeAttack(bonus);
+            return;
+        }
+
+        if(weaponAttributes.isMelee != true)
+        {
+            RangeAttack(bonus, ammo);
         }
     }
-    void meleeAttack(float bonus) 
+    void MeleeAttack(float bonus, DamageEnemy melee) 
     {
-        throw new NotImplementedException();
+         DamageEnemy temp = Object.Instantiate(melee, playerPosition.position, playerPosition.rotation);
+         temp.damage = weaponAttributes.damage + bonus;
+
     }
-    void RangeAttack(float bonus) 
+    void RangeAttack(float bonus, Projectile ammo) 
     {
-        throw new NotImplementedException();
+        Projectile spawnedProjectile = Object.Instantiate(ammo, playerPosition.position, playerPosition.rotation);
+        spawnedProjectile.projectileDamage = weaponAttributes.damage + bonus;
+        spawnedProjectile.enemyProjectile = false;
+        spawnedProjectile.playerProjectile = true;
+
+        Vector2 target = playerPosition.position + playerPosition.transform.up * 5;
+        GameObject tempTarget = new();
+        tempTarget.transform.position = target;
+        spawnedProjectile.target = tempTarget.transform;
+        Object.Destroy(tempTarget);
     }
 }

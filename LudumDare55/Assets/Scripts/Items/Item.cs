@@ -27,15 +27,12 @@ public class Item : MonoBehaviour
         speedBonusText.text = itemAttrubutes.speedBonus.ToString();
         hpBonusText.text = itemAttrubutes.hpBonus.ToString();
         summonCapacityBonusText.text = itemAttrubutes.summonCapacityBonus.ToString();
-
-        GetComponent<SpriteRenderer>().sprite = itemAttrubutes.Icon;
     }
     private void Update()
     {
         if (isPlayerInRange && Input.GetKeyDown(KeyCode.E)) 
         {
-            playerController.ItemHandler(itemAttrubutes);
-            Destroy(gameObject);
+            playerController.ItemHandler(itemAttrubutes, gameObject);          
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)

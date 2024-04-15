@@ -23,7 +23,7 @@ public class SummonDamageOnEnter : MonoBehaviour
         } else if (collision.GetComponent<EnemyController>())
         {
             Debug.Log("hit melee");
-            collision.GetComponent<EnemyController>().OnHit(damage);
+            collision.GetComponent<EnemyController>().OnHit(damage, false);
 
         }
     }

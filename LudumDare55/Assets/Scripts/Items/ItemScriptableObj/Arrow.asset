@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2b61105e2a564a4baa5e49c5780b611, type: 3}
+  m_Name: Arrow
+  m_EditorClassIdentifier: 
+  itemKey: 4
+  damageBonus: 1
+  speedBonus: 0
+  hpBonus: 0
+  summonCapacityBonus: 0
+  isWeapon: 0
+  isMagic: 0
+  weaponAttributes: {fileID: 0}
+  droppedItem: {fileID: 0}
+  Icon: {fileID: 21300000, guid: 4c578225c710fae4b8f93394ac83927f, type: 3}
+  playerSprite: {fileID: 0}
+  ammo: {fileID: -8151778412635853702, guid: 3324cd2f591801641beaaeb57732cda7, type: 3}

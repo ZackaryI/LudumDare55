@@ -35,10 +35,6 @@ public class PlayerWeapon
     {
         DamageEnemy temp = Object.Instantiate(melee, playerPosition.position, playerPosition.rotation);
         temp.damage = weaponAttributes.damage + bonus;
-
-        AudioSource tempAudio = Object.Instantiate(audioSource, playerPosition.position, Quaternion.identity);
-        tempAudio.clip = playerAttributes.swordSwing[Random.Range(0, playerAttributes.swordSwing.Length - 1)];
-        tempAudio.Play();
     }
     void RangeAttack(float bonus, Projectile ammo) 
     {

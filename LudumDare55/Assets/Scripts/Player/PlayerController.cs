@@ -17,6 +17,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] AudioSource audioSource;
     [SerializeField] Image summonIconDisplay;
 
+    [Range(0, 1)]
+    [SerializeField] float meeleeVolume;
+    [Range(0, 1)]
+    [SerializeField] float magicVolume;
+    [Range(0, 1)]
+    [SerializeField] float bowVolume;
+
     Rigidbody2D playerRigidbody;
     SpriteRenderer playerSpriteRenderer;
     Animator animator;
@@ -91,14 +98,17 @@ public class PlayerController : MonoBehaviour
                     AudioSource tempAudio = Instantiate(audioSource, transform.position, Quaternion.identity);
                     tempAudio.clip = playerAttributes.MagicLayer3;
                     tempAudio.Play();
+                    tempAudio.volume = magicVolume;
 
                     tempAudio = Instantiate(audioSource, transform.position, Quaternion.identity);
                     tempAudio.clip = playerAttributes.MagicLayer1[Random.Range(0, playerAttributes.MagicLayer1.Length - 1)];
                     tempAudio.Play();
+                    tempAudio.volume = magicVolume;
 
                     tempAudio = Instantiate(audioSource, transform.position, Quaternion.identity);
                     tempAudio.clip = playerAttributes.MagicLayer2[Random.Range(0, playerAttributes.MagicLayer2.Length - 1)];
                     tempAudio.Play();
+                    tempAudio.volume = magicVolume;
                 }
                 else 
                 {
@@ -107,11 +117,17 @@ public class PlayerController : MonoBehaviour
                     AudioSource tempAudio = Instantiate(audioSource, transform.position, Quaternion.identity);
                     tempAudio.clip = playerAttributes.bowShots[Random.Range(0, playerAttributes.bowShots.Length - 1)];
                     tempAudio.Play();
+                    tempAudio.volume = bowVolume;
                 }
             }
             catch 
             {
                 playerWeapon.Attack(itemTracker.GetDamageBonus(), null, meleeAttack);
+
+                AudioSource tempAudio = Object.Instantiate(audioSource, transform.position, Quaternion.identity);
+                tempAudio.clip = playerAttributes.swordSwing[Random.Range(0, playerAttributes.swordSwing.Length - 1)];
+                tempAudio.Play();
+                tempAudio.volume = meeleeVolume;
             }
             weaponCoolDwonTimer = weaponAttributes.attackSpeed;
         }

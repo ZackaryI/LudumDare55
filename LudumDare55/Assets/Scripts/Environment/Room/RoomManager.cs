@@ -38,11 +38,6 @@ public class RoomManager : MonoBehaviour
         {
             blockEscapes[x].enabled = false;
         }
-        for (int i = 0; i < spawnersInRoom.Count; i++)
-        {
-            spawnersInRoom[i].gameObject.SetActive(false);
-
-        }
         roomStatus = FindObjectOfType<RoomStatusText>();
         enterTrigger = GetComponent<TriggerOnEnterExit2D>();
         enterTrigger.eventOnExit2D.AddListener(() => {checkIfCleared(); }) ;
@@ -58,7 +53,7 @@ public class RoomManager : MonoBehaviour
                 }
                 for (int i = 0; i < spawnersInRoom.Count; i++)
                 {
-                    spawnersInRoom[i].gameObject.SetActive(true); 
+                    spawnersInRoom[i].spawnRepeatBool = true; 
 
                 }
             });
@@ -73,8 +68,7 @@ public class RoomManager : MonoBehaviour
                     blockEscapes[x].enabled = true;
                 }
                 for (int i = 0; i < spawnersInRoom.Count; i++)
-                {
-                    spawnersInRoom[i].gameObject.SetActive(true);
+                { 
                     ListEnemies.AddRange(spawnersInRoom[i].SpawnOnceWithRoom(this));
 
                 }

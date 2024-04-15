@@ -31,6 +31,11 @@ public class EnemyController : MonoBehaviour
     public Animator animator;
     [Header("Events")]
     /// <summary>
+    /// if the enemy attacks. 
+    /// The object is already cleaned with the method OnDeath, this event is for additional events outside the class. 
+    /// </summary>
+    public UnityEvent onAttackEvent;
+    /// <summary>
     /// if the enemy dies. 
     /// The object is already cleaned with the method OnDeath, this event is for additional events outside the class. 
     /// </summary>
@@ -158,6 +163,7 @@ public class EnemyController : MonoBehaviour
 
     IEnumerator AttackLoop()
     {
+        onAttackEvent?.Invoke(); 
         if (colliderAttack != null && isDying == false)
         {
             colliderAttack.enabled = true;

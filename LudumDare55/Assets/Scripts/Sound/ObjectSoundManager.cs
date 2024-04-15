@@ -20,19 +20,19 @@ public class ObjectSoundManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    void playAudioDeath()
+    public void playAudioDeath()
     {
         audioSource.PlayOneShot(deathSound);
     }
-    
-    void playAudioHit()
+
+    public void playAudioHit()
     {
         if (!audioSource.isPlaying)
         {
             audioSource.PlayOneShot(hitSound);
         }
     }
-    void playAudioAttack()
+    public void playAudioAttack()
     {
         if (!audioSource.isPlaying)
         {

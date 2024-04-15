@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -59,7 +60,13 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            animator.SetBool("isWalking", false);
+            bool exists = animator.parameters.Any(x => x.name == "isWalking");
+
+            if (exists == true)
+            {
+
+                animator.SetBool("isWalking", false);
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.Mouse0) && currentSummonAmount + 1 <= playerAttributes.maxSummons + itemTracker.GetSummonCapacityBonus() && weaponCoolDwonTimer <= 0 + itemTracker.GetSpeedBonus())

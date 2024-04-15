@@ -1,12 +1,13 @@
-using System.Collections;
 using UnityEngine;
 
 public class PlayerMovement
 {
-    public void Movement(Rigidbody2D playerRigidbody, PlayerAttributes playerAttributes)
+    public void Movement(Rigidbody2D playerRigidbody, PlayerAttributes playerAttributes, Animator animator)
     {
         Vector2 movementVector = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         playerRigidbody.velocity = movementVector * playerAttributes.playerMoveSpeed;
+
+
     }
 
     public void RotatePlayer(Camera cam, Transform playerTransform)

@@ -15,8 +15,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] TextMeshProUGUI summonTracker;
     [SerializeField] AudioSource audioSource;
 
+
     Rigidbody2D playerRigidbody;
     SpriteRenderer playerSpriteRenderer;
+    Animator animator;
     Camera cam;
 
     Health health;
@@ -34,6 +36,7 @@ public class PlayerController : MonoBehaviour
     {
         playerRigidbody = GetComponent<Rigidbody2D>();
         playerSpriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
         cam = Camera.main;
 
         health = new(playerAttributes.health, DoAtDeath, DoAtDamage,0, healthbar);
@@ -50,6 +53,15 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
+        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+        {
+            animator.SetBool("isWalking", true);
+        }
+        else
+        {
+            animator.SetBool("isWalking", false);
+        }
+
         if (Input.GetKeyDown(KeyCode.Mouse0) && currentSummonAmount + 1 <= playerAttributes.maxSummons + itemTracker.GetSummonCapacityBonus() && weaponCoolDwonTimer <= 0 + itemTracker.GetSpeedBonus())
         {
             AddSummon(currentSummonAbility);
@@ -105,13 +117,8 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        playerMovement.Movement(playerRigidbody, playerAttributes);
+        playerMovement.Movement(playerRigidbody, playerAttributes, animator);
         playerMovement.RotatePlayer(cam, transform);
-
-        if ((Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0) && isPlayingFootstep == false) 
-        {
-            StartCoroutine(PlayerFootsteps(playerAttributes.walkingSound));
-        }
     }
     //Summon related methods
     public void RemoveSummon() 
@@ -141,14 +148,12 @@ public class PlayerController : MonoBehaviour
         Vector3 offset = new(0, 0, 10);
         Instantiate(summon, mousePos + offset, Quaternion.identity);
     }
-    IEnumerator PlayerFootsteps(AudioClip[] audio)
+    public void PlayerFootsteps()
     {
         isPlayingFootstep = true;
         AudioSource tempAudio = Instantiate(audioSource, transform.position, Quaternion.identity);
         tempAudio.clip = playerAttributes.walkingSound[Random.Range(0, playerAttributes.walkingSound.Length - 1)];
         tempAudio.Play();
-
-        yield return new WaitForSeconds(.1f);
         isPlayingFootstep = false;
     }
     //item related methods

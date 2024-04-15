@@ -52,7 +52,7 @@ public class ItemTracker
     }
     public void TossUnequipedItem(Transform item)
     {
-        Vector3 randomOffset = new Vector2(Random.Range(-1, 1), Random.Range(-1, 1));
+        Vector3 randomOffset = new Vector2(Random.Range(-1f, 1f), Random.Range(-1, 1));
         Object.Instantiate(item, playerPosition.position + randomOffset, Quaternion.identity);
     }
     public float GetDamageBonus()

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: Magic
   enemyHP: 25
-  enemyAttack: 20
+  enemyAttack: 15
   enemyMovementSpeed: 1
   enemyRangeOfAttack: 15
   enemyWeakness: {fileID: 11400000, guid: 453329e4e74ed7f458d527c0f8259d6c, type: 2}

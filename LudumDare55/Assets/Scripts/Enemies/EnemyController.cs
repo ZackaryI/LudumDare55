@@ -62,13 +62,15 @@ public class EnemyController : MonoBehaviour
 
     private void Initialize()
     {
+        isDying = false;
         aiPath = GetComponent<AIPath>();
         aIDestinationSetter = GetComponent<AIDestinationSetter>();
+        aIDestinationSetter.target = charRef.transform;
         animator = GetComponent<Animator>();
         enemyName = enemyTypeSO.enemyName;
         enemyRangeOfAttack = enemyTypeSO.enemyRangeOfAttack;
-        enemyHP = enemyTypeSO.enemyHP;
-        enemyDamage = enemyTypeSO.enemyAttack;
+        enemyHP = enemyTypeSO.enemyHP * (enemyTier * 0.5f);
+        enemyDamage = enemyTypeSO.enemyAttack * (enemyTier * 0.5f);
         onDeathEvent.AddListener(() => onDeath()); 
     }
     // Start is called before the first frame update
@@ -87,12 +89,7 @@ public class EnemyController : MonoBehaviour
         }
 
         colliderRange = GetComponent<Collider2D>();
-        Initialize();
-
-        if (aIDestinationSetter.target == null)
-        {
-            aIDestinationSetter.target = charRef.transform;
-        }
+        Initialize(); 
 
     }
 
@@ -102,9 +99,10 @@ public class EnemyController : MonoBehaviour
         Vector2 direction = charRef.transform.position - transform.position;
         transform.rotation = Quaternion.FromToRotation(Vector3.up, direction);
         checkDistance();
+        //In attack currently, we're moving the delay up 
         if (canAttack == false)
         {
-            
+            aIDestinationSetter.target = null;
             time += Time.deltaTime;
 
             if (time > delayAttack)
@@ -114,8 +112,9 @@ public class EnemyController : MonoBehaviour
             }
         } else
         { 
-            aIDestinationSetter.target = null;
+            aIDestinationSetter.target = charRef.transform;
         } 
+         
     }
 
 
@@ -135,7 +134,7 @@ public class EnemyController : MonoBehaviour
         onHealthChange?.Invoke((int)damage);
 
 
-        if(enemyHP < 0)
+        if(enemyHP <= 0 && isDying == false)
         {
 
             if (playerProjectile)
@@ -193,14 +192,14 @@ public class EnemyController : MonoBehaviour
 
     }
 
-    IEnumerator Despawn()
+    public IEnumerator Despawn()
     {
         //We let the animation finished first 
         // yield return new WaitWhile(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime <= 1.0f);
-        //yield return new WaitForSeconds(2f);
         //We reset the stats of the object to reuse it later through the object pool 
         yield return null;
         Initialize();
+        yield return new WaitForSeconds(0.2f);
         gameObject.SetActive(false);
     }
 }

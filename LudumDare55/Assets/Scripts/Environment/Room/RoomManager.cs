@@ -1,31 +1,56 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(TriggerOnEnterExit2D))]
 [RequireComponent(typeof(BoxCollider2D))]
 public class RoomManager : MonoBehaviour
 {
-     
+    [Header("Text Reference")]
+    public RoomStatusText roomStatus; 
+    [Header("Escape Colliders")]
+    public List<Collider2D> blockEscapes;
     private TriggerOnEnterExit2D enterTrigger;
     [Header("Enemies")]
     public List<Spawner> spawnersInRoom;
     public int totalEnemies = 0;
     public int killCount = 0;
     [Header("Rewards")]
+    public bool isRewardRandomized = false;
+    public int numberOfDrops = 2;
     public Transform rewardPickupSpot; 
-
     public List<GameObject> rewards;
-    private bool roomComplete = false; 
 
+    [Header("Events")]
+    public UnityEvent onEndOfRoomEvent;
+    public UnityEvent onStartOfRoomEvent;
+    private bool roomComplete = false; 
+    private bool roomFled = false; 
+    private List<GameObject> ListEnemies = new List<GameObject>();
     // Start is called before the first frame update
     void Start()
     {
-        enterTrigger =  GetComponent<TriggerOnEnterExit2D>();
+
+        for (int x = 0; x < blockEscapes.Count; x++)
+        {
+            blockEscapes[x].enabled = false;
+        }
+
+        roomStatus = FindObjectOfType<RoomStatusText>();
+        enterTrigger = GetComponent<TriggerOnEnterExit2D>();
+        enterTrigger.eventOnExit2D.AddListener(() => {checkIfCleared(); }) ;
         enterTrigger.eventOnEnter2D.AddListener(() => {
+            onStartOfRoomEvent?.Invoke();
+            roomStatus.UpdateText("Room start !");
+            for (int x = 0; x < blockEscapes.Count; x++)
+            {
+                blockEscapes[x].enabled = true; 
+            }
             for (int i = 0; i < spawnersInRoom.Count; i++)
             {
-                spawnersInRoom[i].SpawnOnceWithRoom(this);
+                ListEnemies.AddRange(spawnersInRoom[i].SpawnOnceWithRoom(this)); 
+                
             }
         });
         foreach (Spawner item in spawnersInRoom)
@@ -40,25 +65,79 @@ public class RoomManager : MonoBehaviour
         }
     }
 
-    void onEndOfRoom()
+    void checkIfCleared()
     {
-        foreach (GameObject item in rewards)
+        if (roomComplete == false)
         {
-            GameObject e  = Instantiate(item);
-            var randomPos = (Vector3)Random.insideUnitCircle * 5;
-            randomPos += rewardPickupSpot.transform.position;
-            e.transform.position = randomPos;
+
+            roomFled = true; 
+            roomStatus.UpdateText("Room fled !");
+            foreach (GameObject item in ListEnemies)
+            {
+                StartCoroutine(item.GetComponent<EnemyController>().Despawn());
+            }
+
+            ListEnemies.Clear();
+
+            enterTrigger.eventOnEnter2D.RemoveAllListeners();
+            enterTrigger.eventOnExit2D.RemoveAllListeners();
+
+            for (int x = 0; x < blockEscapes.Count; x++)
+            {
+                blockEscapes[x].enabled = false;
+            }
 
         }
+    }
+    void onEndOfRoom()
+    {
+
+        onEndOfRoomEvent?.Invoke();
+        for (int x = 0; x < blockEscapes.Count; x++)
+        {
+            blockEscapes[x].enabled = false;
+        }
+
+        if (isRewardRandomized == false)
+        {
+            for (int x = 0; x < rewards.Count; x++)
+            {
+                GameObject e = Instantiate(rewards[x]);
+                var randomPos = (Vector3)Random.insideUnitCircle * 5;
+                randomPos += rewardPickupSpot.transform.position;
+                e.transform.position = randomPos;
+
+            }
+        } else
+        {
+            for (int x = 0; x < numberOfDrops; x++)
+            {
+
+                int rand = Random.Range(0, rewards.Count-1);
+                GameObject e = Instantiate(rewards[rand]);
+                var randomPos = (Vector3)Random.insideUnitCircle * 5;
+                randomPos += rewardPickupSpot.transform.position;
+                e.transform.position = randomPos;
+
+            }
+        }
+
+        ListEnemies.Clear();
+
+        enterTrigger.eventOnEnter2D.RemoveAllListeners();
+        enterTrigger.eventOnExit2D.RemoveAllListeners();
+
     }
     // Update is called once per frame
     void Update()
     {
-        if(killCount >= totalEnemies && roomComplete == false)
+        if(killCount >= totalEnemies && roomComplete == false && roomFled == false)
         {
             onEndOfRoom();
             roomComplete = true; 
         }
+
+
     }
 
     /// <summary>

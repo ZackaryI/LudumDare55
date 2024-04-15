@@ -120,9 +120,10 @@ public class Spawner : MonoBehaviour
         }
     }
 
-    public void SpawnOnceWithRoom(RoomManager rm)
+    public List<GameObject> SpawnOnceWithRoom(RoomManager rm)
     {
-        if(spawnedOnce == false)
+        List<GameObject> ListEnemies = new List<GameObject>();
+        if (spawnedOnce == false)
         {
             spawnedOnce = true; 
             Wave currentWave = waves[0];
@@ -138,10 +139,12 @@ public class Spawner : MonoBehaviour
                     var randomPos = (Vector3)Random.insideUnitCircle * 1;
                     randomPos += gameObject.transform.position;
                     e.transform.position = randomPos;
-                    e.SetActive(true); 
+                    e.SetActive(true);
+                    ListEnemies.Add(e);
                 }
             }
         }
+        return ListEnemies; 
     }
 
 }
@@ -168,7 +171,7 @@ public class ContentWave
     public int enemyTier; 
 
 }
-
+#if UNITY_EDITOR
 [CustomEditor(typeof(Spawner))]
 class SpawnerEditor : Editor
 {
@@ -198,3 +201,4 @@ class SpawnerEditor : Editor
         base.OnInspectorGUI();
     }
 }
+#endif

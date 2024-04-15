@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Melee
   m_EditorClassIdentifier: 
   enemyName: Melee
-  enemyHP: 75
+  enemyHP: 50
   enemyAttack: 5
   enemyMovementSpeed: 1
   enemyRangeOfAttack: 3.1

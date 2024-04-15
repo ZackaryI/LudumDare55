@@ -70,8 +70,8 @@ public class SummonController : MonoBehaviour
         animator = GetComponent<Animator>();
         summonName = summonTypeSO.enemyName;
         summonRangeOfAttack = summonTypeSO.enemyRangeOfAttack;
-        summonHP = summonTypeSO.enemyHP;
-        summonDamage = summonTypeSO.enemyAttack;
+        summonHP = summonTypeSO.enemyHP * (summonTier * 0.5f) * 1.2f;
+        summonDamage = summonTypeSO.enemyAttack * (summonTier * 0.5f) * 1.2f;
         onDeathEvent.AddListener(() => onDeath());
     }
     private void Start()

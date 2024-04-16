@@ -4599,6 +4599,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeDuration: 0.5
+  volumeCombatMusic: 0.36
+  volumeNoncombatMusic: 0.36
   combatMusic: {fileID: 8300000, guid: 3198095a9efe9744c8af98fb34dd6a8e, type: 3}
   nonCombatMusic:
   - {fileID: 8300000, guid: 7a3083458112e21458c3b5b48e7f790f, type: 3}

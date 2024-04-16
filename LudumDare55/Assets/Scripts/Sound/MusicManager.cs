@@ -24,7 +24,7 @@ public class MusicManager : MonoBehaviour
     public void playNonCombatMusic()
     {
         musicAudioSource.volume = 0; 
-        musicAudioSource.clip = nonCombatMusic[Random.Range(0, nonCombatMusic.Length - 1)];
+        musicAudioSource.clip = nonCombatMusic[Random.Range(1, nonCombatMusic.Length - 1)];
         StartCoroutine(FadeAudioSource(musicAudioSource, 1, fadeDuration)); //USAGE HERE
 
 

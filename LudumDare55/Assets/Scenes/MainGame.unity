@@ -3193,9 +3193,9 @@ MonoBehaviour:
   summonTracker: {fileID: 1883839753}
   audioSource: {fileID: 3426598633832435905, guid: 6c79af4f1fd3f384aa44b8ad7d4318bb, type: 3}
   summonIconDisplay: {fileID: 1823171092}
-  meeleeVolume: 1
-  magicVolume: 0
-  bowVolume: 0
+  meeleeVolume: 0.35
+  magicVolume: 0.35
+  bowVolume: 0.15
 --- !u!58 &534337699
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -4631,7 +4631,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -7567392199061793915, guid: dc018ce7c73b0b0479103e28e3d3f2eb, type: 2}
   m_audioClip: {fileID: 8300000, guid: 7a3083458112e21458c3b5b48e7f790f, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.506
+  m_Volume: 0.29
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -76400,6 +76400,10 @@ PrefabInstance:
     - target: {fileID: 4009304007825258969, guid: 3ade3a8ed65ebc74ba55b21c9c658a55, type: 3}
       propertyPath: m_Name
       value: Boss
+      objectReference: {fileID: 0}
+    - target: {fileID: 4062086697737478921, guid: 3ade3a8ed65ebc74ba55b21c9c658a55, type: 3}
+      propertyPath: m_Volume
+      value: 0.34
       objectReference: {fileID: 0}
     - target: {fileID: 6479874590236247508, guid: 3ade3a8ed65ebc74ba55b21c9c658a55, type: 3}
       propertyPath: attackSound

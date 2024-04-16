@@ -180,7 +180,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Ludum Dare 55
+  m_text: Summon Dungeon
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f18673709780da4aab191320a8e4c6a, type: 2}
   m_sharedMaterial: {fileID: -2141759369708730764, guid: 8f18673709780da4aab191320a8e4c6a, type: 2}

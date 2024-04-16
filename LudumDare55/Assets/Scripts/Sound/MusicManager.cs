@@ -5,7 +5,12 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class MusicManager : MonoBehaviour
 {
-    public float fadeDuration = 0.5f; 
+    public float fadeDuration = 0.5f;
+    [Header("Volumes")]
+    [Range(0.0f, 1.0f)]
+    public float volumeCombatMusic = 1f;
+    [Range(0.0f, 1.0f)]
+    public float volumeNoncombatMusic = 1f;
     public AudioClip combatMusic;
     public AudioClip[] nonCombatMusic;
     private AudioSource musicAudioSource;
@@ -18,14 +23,14 @@ public class MusicManager : MonoBehaviour
     {
         musicAudioSource.volume = 0;
         musicAudioSource.clip = combatMusic;
-        StartCoroutine(FadeAudioSource(musicAudioSource, 1, fadeDuration)); //USAGE HERE
+        StartCoroutine(FadeAudioSource(musicAudioSource, volumeCombatMusic, fadeDuration)); //USAGE HERE
     }
 
     public void playNonCombatMusic()
     {
         musicAudioSource.volume = 0; 
         musicAudioSource.clip = nonCombatMusic[Random.Range(0, nonCombatMusic.Length - 1)];
-        StartCoroutine(FadeAudioSource(musicAudioSource, 1, fadeDuration)); //USAGE HERE
+        StartCoroutine(FadeAudioSource(musicAudioSource, volumeNoncombatMusic, fadeDuration)); //USAGE HERE
 
 
     }
